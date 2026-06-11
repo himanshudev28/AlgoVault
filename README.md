@@ -1,36 +1,239 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+# ⚡ AlgoVault
+
+### A revision-first DSA tracker built for placement prep
+
+[![Next.js](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Neon Postgres](https://img.shields.io/badge/Neon_Postgres-00E5CC?style=for-the-badge&logo=postgresql&logoColor=black)](https://neon.tech/)
+[![Clerk Auth](https://img.shields.io/badge/Clerk_Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.com/)
+[![Groq AI](https://img.shields.io/badge/Groq_AI-F55036?style=for-the-badge)](https://groq.com/)
+
+**215 curated problems · SM-2 spaced repetition · AI explanations · Bhaiya Sheets · Mock Interviews · Algorithm Visualizers**
+
+</div>
+
+---
+
+## What is AlgoVault?
+
+AlgoVault is a full-stack DSA practice tracker that goes beyond a simple checklist. It combines spaced repetition scheduling, AI-powered hints, in-browser code execution, and a rich problem management system — all tied to your account so progress follows you everywhere.
+
+---
+
+## Features
+
+### Problems & Progress
+- **215 curated problems** across 20 topics with difficulty tagging (Easy / Easy+ / Medium / Medium+ / Hard)
+- One-click status cycle — `Not Started → Attempting → Solved`
+- Per-problem **notes editor** and **solution code** (C++, Java, Python, JS) with autosave
+- **Confidence stars** (1–5), bookmark flag, and revision flag per problem
+- Filter & search by topic, difficulty, status, bookmark, revision-due
+
+### Dashboard
+- Solved ring, day streak counter, and 20-week activity heatmap
+- Difficulty split doughnut and topic strength grid
+- **"Focus next"** — surfaces your weakest topics automatically
+- Every card deep-links into the filtered problem list
+
+### Spaced Repetition (SM-2)
+- Solving a problem seeds a first review for the next day
+- Rate recall: **Again / Hard / Good / Easy** — interval adapts via the SM-2 algorithm
+- Due-today queue shown in the **Revision** tab
+- Flagged (`needs revision`) and low-confidence problems are always queued
+
+### AI Help (Groq)
+- Staged hints that never spoil the answer: **Hint → Approach → Complexity → Full Solution**
+- **"Explain simpler"** and **Hinglish** modes
+- All AI responses cached in Postgres by prompt hash (no duplicate API calls)
+
+### Bhaiya Sheets *(New)*
+Popular DSA sheets from top educators — one-click import straight into your tracker:
+
+| Sheet | Author | Problems |
+|---|---|---|
+| Striver A2Z DSA | Striver (TakeUForward) | 455 |
+| Love Babbar 450 | Love Babbar | 450 |
+| LeadCoding by Fraz | Fraz | 250 |
+| Arsh Goyal 45-Day Plan | Arsh Goyal | 280 |
+| Apna College DSA | Shradha & Aman | 375 |
+| Siddharth Singh 450 | Siddharth Singh | 450 |
+| The Code Skool DSA | The Code Skool | 100+ |
+
+Once imported, every sheet gets the full tracker treatment — status, notes, stars, revision, AI explain, and code runner.
+
+### My Sheets (Custom Import)
+- **CSV** — upload file or paste raw text; auto-detects columns
+- **PDF** — AI extracts problems from text-based PDFs (Groq)
+- **Manual** — build a sheet from scratch row by row
+- Every import goes through a review/edit screen before saving
+
+### Mock Interview
+- Pick topics, problem count, and duration
+- Real countdown timer — results saved to progress on finish
+
+### Algorithm Visualizers
+11 step-through visualizers with play / pause / scrub / randomize:
+- Bubble, Insertion, Selection, Merge, Quick Sort
+- Binary Search, Two Pointers, Sliding Window
+- Kadane's Algorithm, BFS Grid, DFS Grid
+
+### Code Runner
+- Run your solution in **C++ / Java / Python / JavaScript**
+- Custom stdin, output panel — powered by the free Wandbox API
+
+### Export
+- Download all your progress, notes, and custom sheets as JSON — your data, always.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router, RSC) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4 |
+| Database | Neon Postgres (serverless) |
+| ORM | Drizzle ORM |
+| Auth | Clerk (email/password + Google one-click) |
+| AI | Groq (llama3-8b-8192) |
+| Code execution | Wandbox API |
+| Spaced repetition | SM-2 algorithm |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- A [Neon](https://neon.tech) Postgres database
+- A [Clerk](https://clerk.com) application
+- A [Groq](https://groq.com) API key
+
+### Installation
+
+```bash
+git clone https://github.com/himanshudev28/AlgoVault.git
+cd AlgoVault
+npm install
+```
+
+### Environment Variables
+
+Create a `.env` file in the root:
+
+```env
+# Neon Postgres
+DATABASE_URL=postgresql://...
+
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
+CLERK_SECRET_KEY=sk_...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+# Groq
+GROQ_API_KEY=gsk_...
+```
+
+### Database Setup
+
+```bash
+npx drizzle-kit push
+```
+
+### Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── (app)/               # Authenticated pages
+│   │   ├── dashboard/       # Dashboard with stats & heatmap
+│   │   ├── problems/        # Problem list + [id] detail page
+│   │   ├── revision/        # SM-2 revision queue
+│   │   ├── sheets/          # My Sheets — custom imports
+│   │   ├── bhaiya-sheets/   # Bhaiya Sheets — popular DSA sheets
+│   │   ├── mock/            # Mock Interview
+│   │   └── visualizers/     # Algorithm visualizers
+│   ├── api/
+│   │   ├── progress/        # CRUD for problem progress
+│   │   ├── revision/        # SM-2 scheduler endpoint
+│   │   ├── sheets/          # Sheet CRUD + CSV/PDF parse
+│   │   ├── bhaiya-sheets/   # Bhaiya sheet auto-import
+│   │   ├── ai/explain/      # Staged AI hints (Groq)
+│   │   ├── run/             # Code runner (Wandbox)
+│   │   ├── fetch-problem/   # Problem statement fetcher
+│   │   └── export/          # JSON export
+│   ├── sign-in/             # Clerk sign-in
+│   └── sign-up/             # Clerk sign-up
+├── components/
+│   ├── Sidebar.tsx          # Navigation sidebar
+│   ├── StatusButton.tsx     # Status cycle button
+│   ├── Stars.tsx            # Confidence rating stars
+│   ├── AddQuestionPanel.tsx # Add question to sheet
+│   ├── RunPanel.tsx         # In-browser code runner
+│   ├── ThemeToggle.tsx      # Dark/light toggle
+│   └── ui.tsx               # Shared UI primitives
+├── data/
+│   ├── questions.ts         # 215-problem static catalog
+│   └── bhaiyaSheets.ts      # Bhaiya sheets catalog
+├── db/
+│   ├── schema.ts            # Drizzle schema
+│   └── index.ts             # DB client
+└── lib/
+    ├── session.ts           # Clerk session helpers
+    ├── sm2.ts               # SM-2 spaced repetition
+    ├── groq.ts              # Groq AI client + cache
+    ├── csv.ts               # CSV parser
+    ├── markdown.ts          # Markdown renderer
+    ├── visualizers.ts       # Visualizer frame generators
+    ├── useProgress.ts       # Progress state hook
+    └── useSheets.ts         # Sheets state hook
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+progress          — per-user, per-question: status, notes, code, SM-2 fields
+activity_log      — append-only log for heatmap & streaks
+ai_cache          — Groq response cache keyed by prompt hash
+sheets            — user-created/imported sheet metadata
+custom_questions  — questions belonging to a sheet (ids start at 100 000)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Problem **statements** are not hosted — every problem links to LeetCode/GFG (copyright).
+- Auth is **Clerk**: email/password + Google one-click sign-in. For production, create a Clerk production instance with your own OAuth credentials.
+- The Bhaiya Sheets import fetches directly from public Google Sheets CSV exports — no scraping.
+- All imported sheet data is stored in **your** account's database rows — fully portable.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first.
+
+---
+
+<div align="center">
+
+Built with by [Himanshu](https://github.com/himanshudev28)
+
+</div>

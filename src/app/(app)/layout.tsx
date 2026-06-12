@@ -8,6 +8,7 @@ export default async function AppLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const user = await getSessionUser();
   if (!user) redirect("/sign-in");
+  // user is still needed for the auth check; Sidebar/ProfileButton read from Clerk directly
 
   return (
     /*
@@ -16,7 +17,7 @@ export default async function AppLayout({
      * the sidebar and content side by side.
      */
     <div className="flex h-screen overflow-hidden bg-zinc-50 dark:bg-zinc-950">
-      <Sidebar name={user.name} email={user.email} />
+      <Sidebar />
 
       {/*
        * flex-1 min-h-0: lets this column shrink below its content height so

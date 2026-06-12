@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useClerk } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ProfileButton } from "@/components/ProfileButton";
 
@@ -73,9 +72,8 @@ const MenuIcon = () => (
   </svg>
 );
 
-export function Sidebar({ name, email }: { name: string; email: string }) {
+export function Sidebar() {
   const pathname = usePathname();
-  const { signOut } = useClerk();
   const [open, setOpen] = useState(false);
 
   // Auto-close drawer on navigation
@@ -87,10 +85,6 @@ export function Sidebar({ name, email }: { name: string; email: string }) {
     else document.body.style.overflow = "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
-
-  const handleSignOut = async () => {
-    await signOut({ redirectUrl: "/" });
-  };
 
   const navLinks = (onClick?: () => void) =>
     NAV.map((item) => {
@@ -112,18 +106,6 @@ export function Sidebar({ name, email }: { name: string; email: string }) {
       );
     });
 
-  const userBlock = (
-    <div className="flex items-center gap-2.5 px-1">
-      <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-emerald-500 to-teal-600 text-xs font-bold text-white">
-        {name.charAt(0).toUpperCase()}
-      </div>
-      <div className="min-w-0">
-        <div className="truncate text-sm font-medium">{name}</div>
-        <div className="truncate text-[11px] text-zinc-500">{email}</div>
-      </div>
-    </div>
-  );
-
   return (
     <>
       {/* ── Desktop sidebar: in-flow flex column ──────────────────── */}
@@ -135,17 +117,10 @@ export function Sidebar({ name, email }: { name: string; email: string }) {
           </span>
         </Link>
         <nav className="flex flex-col gap-0.5">{navLinks()}</nav>
-        <div className="mt-auto flex flex-col gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-800/60">
-          <div className="flex items-center justify-between px-1">
+        <div className="mt-auto border-t border-zinc-100 pt-4 dark:border-zinc-800/60">
+          <div className="px-1">
             <ThemeToggle />
-            <button
-              onClick={handleSignOut}
-              className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-red-500 dark:hover:bg-zinc-800"
-            >
-              Sign out
-            </button>
           </div>
-          {userBlock}
         </div>
       </aside>
 
@@ -199,17 +174,8 @@ export function Sidebar({ name, email }: { name: string; email: string }) {
               </button>
             </div>
             <nav className="flex flex-col gap-0.5">{navLinks(() => setOpen(false))}</nav>
-            <div className="mt-auto flex flex-col gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-              <div className="flex items-center justify-between">
-                <ThemeToggle />
-                <button
-                  onClick={handleSignOut}
-                  className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 hover:text-red-500"
-                >
-                  Sign out
-                </button>
-              </div>
-              {userBlock}
+            <div className="mt-auto border-t border-zinc-100 pt-4 dark:border-zinc-800">
+              <ThemeToggle />
             </div>
           </aside>
         </div>

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { ProfileButton } from "@/components/ProfileButton";
 
 const Icons = {
@@ -123,8 +122,11 @@ export function Sidebar() {
       <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-800/60 bg-zinc-950 px-3 py-5 md:flex">
         <Logo />
         <nav className="flex flex-1 flex-col gap-0.5">{navLinks()}</nav>
-        <div className="border-t border-zinc-800/60 pt-4">
-          <ThemeToggle />
+        <div className="border-t border-zinc-800/60 pt-3">
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-zinc-900/60 text-[11px] text-zinc-500">
+            <span className="size-1.5 rounded-full bg-lime-400 shrink-0" />
+            Dark mode
+          </div>
         </div>
       </aside>
 
@@ -141,7 +143,6 @@ export function Sidebar() {
           </span>
         </Link>
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <ProfileButton />
           <button
             onClick={() => setOpen(!open)}
@@ -180,8 +181,11 @@ export function Sidebar() {
               </button>
             </div>
             <nav className="flex flex-col gap-0.5">{navLinks(() => setOpen(false))}</nav>
-            <div className="mt-auto border-t border-zinc-800/60 pt-4">
-              <ThemeToggle />
+            <div className="mt-auto border-t border-zinc-800/60 pt-3">
+              <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-zinc-900/60 text-[11px] text-zinc-500">
+                <span className="size-1.5 rounded-full bg-lime-400 shrink-0" />
+                Dark mode
+              </div>
             </div>
           </aside>
         </div>

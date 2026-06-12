@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/session";
 import { Sidebar } from "@/components/Sidebar";
+import { TopBar } from "@/components/TopBar";
 
 export default async function AppLayout({
   children,
@@ -23,6 +24,7 @@ export default async function AppLayout({
        * mobile header; desktop needs no extra top padding (sidebar is in-flow).
        */}
       <div className="flex min-h-0 flex-1 flex-col overflow-y-auto pt-14 md:pt-0">
+        <TopBar />
         <main className="flex-1 px-4 py-6 md:px-8 md:py-8">{children}</main>
       </div>
     </div>

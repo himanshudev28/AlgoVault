@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useClerk } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ProfileButton } from "@/components/ProfileButton";
 
 // Clean SVG icons — no emoji
 const Icons = {
@@ -158,6 +159,7 @@ export function Sidebar({ name, email }: { name: string; email: string }) {
         </Link>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <ProfileButton />
           <button
             onClick={() => setOpen(!open)}
             className="inline-flex size-9 items-center justify-center rounded-xl border border-zinc-200 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"

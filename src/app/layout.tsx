@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "AlgoVault — DSA Tracker & Revision Sheet",
   description:
     "Track 215 curated DSA problems, store your notes & solutions, and never forget what you learned with spaced-repetition revision.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
 };
 
 const themeInit = `try{if(localStorage.getItem("theme")==="light")document.documentElement.classList.remove("dark")}catch{}`;

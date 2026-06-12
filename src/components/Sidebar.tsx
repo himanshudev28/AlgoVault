@@ -110,7 +110,7 @@ export function Sidebar() {
     <>
       {/* ── Desktop sidebar: in-flow flex column ──────────────────── */}
       <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80 md:flex">
-        <Link href="/dashboard" className="mb-6 flex items-center gap-2 px-1">
+        <Link href="/" className="mb-6 flex items-center gap-2 px-1">
           <span className="text-xl">⚡</span>
           <span className="text-lg font-bold tracking-tight">
             Algo<span className="text-emerald-500">Vault</span>
@@ -126,7 +126,7 @@ export function Sidebar() {
 
       {/* ── Mobile: fixed top header ───────────────────────────────── */}
       <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-200 bg-white/90 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90 md:hidden">
-        <Link href="/dashboard" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-lg">⚡</span>
           <span className="font-bold tracking-tight">
             Algo<span className="text-emerald-500">Vault</span>
@@ -157,7 +157,7 @@ export function Sidebar() {
           <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
             <div className="mb-6 flex items-center justify-between">
               <Link
-                href="/dashboard"
+                href="/"
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-2"
               >

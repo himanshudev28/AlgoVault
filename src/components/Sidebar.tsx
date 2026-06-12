@@ -109,10 +109,14 @@ export function Sidebar() {
   return (
     <>
       {/* ── Desktop sidebar: in-flow flex column ──────────────────── */}
-      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80 md:flex">
-        <Link href="/" className="mb-6 flex items-center gap-2 px-1">
-          <span className="text-xl">⚡</span>
-          <span className="text-lg font-bold tracking-tight">
+      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800/70 dark:bg-zinc-950/90 md:flex">
+        <Link href="/" className="mb-6 flex items-center gap-2.5 px-1 group">
+          <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600 shadow-sm shadow-emerald-500/20 group-hover:shadow-emerald-500/30 transition-shadow">
+            <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
+            </svg>
+          </div>
+          <span className="text-[15px] font-bold tracking-tight">
             Algo<span className="text-emerald-500">Vault</span>
           </span>
         </Link>
@@ -126,8 +130,12 @@ export function Sidebar() {
 
       {/* ── Mobile: fixed top header ───────────────────────────────── */}
       <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-200 bg-white/90 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90 md:hidden">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-lg">⚡</span>
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600">
+            <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
+            </svg>
+          </div>
           <span className="font-bold tracking-tight">
             Algo<span className="text-emerald-500">Vault</span>
           </span>
@@ -161,8 +169,12 @@ export function Sidebar() {
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-2"
               >
-                <span className="text-xl">⚡</span>
-                <span className="text-lg font-bold tracking-tight">
+                <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600">
+                  <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
+                  </svg>
+                </div>
+                <span className="text-[15px] font-bold tracking-tight">
                   Algo<span className="text-emerald-500">Vault</span>
                 </span>
               </Link>

@@ -61,9 +61,9 @@ export default function BhaiyaSheetsPage() {
     }
   };
 
-  const card = "rounded-xl border border-zinc-800 bg-zinc-900/60";
+  const card = "rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60";
   const btn = "inline-flex items-center gap-1.5 rounded-lg bg-lime-400 px-4 py-2 text-sm font-semibold text-zinc-950 transition-colors hover:bg-lime-300 disabled:opacity-60";
-  const btnGhost = "inline-flex items-center gap-1.5 rounded-lg border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200";
+  const btnGhost = "inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200";
   const btnOutline = "inline-flex items-center gap-1.5 rounded-lg border border-lime-400/50 px-4 py-2 text-sm font-semibold text-lime-400 transition-colors hover:bg-lime-400/10";
 
   return (
@@ -94,7 +94,7 @@ export default function BhaiyaSheetsPage() {
                   <h2 className="font-semibold leading-snug">{sheet.name}</h2>
                   <p className="mt-0.5 text-xs text-zinc-500">{sheet.author}</p>
                 </div>
-                <span className="shrink-0 rounded-lg bg-zinc-800 px-2.5 py-1 text-xs font-medium tabular-nums text-zinc-600 bg-zinc-800 text-zinc-400">
+                <span className="shrink-0 rounded-lg bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 text-xs font-medium tabular-nums text-zinc-600 bg-zinc-100 dark:bg-zinc-800 text-zinc-400">
                   {sheet.questionCount}+ Qs
                 </span>
               </div>
@@ -115,7 +115,7 @@ export default function BhaiyaSheetsPage() {
                   </span>
                 ))}
                 {sheet.topics.length > 6 && (
-                  <span className="rounded-md bg-zinc-800 px-2 py-0.5 text-[11px] text-zinc-500 bg-zinc-800">
+                  <span className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[11px] text-zinc-500 bg-zinc-100 dark:bg-zinc-800">
                     +{sheet.topics.length - 6} more
                   </span>
                 )}

@@ -10,7 +10,7 @@ const NEXT: Record<Status, Status> = {
 
 const STYLE: Record<Status, { cls: string; glyph: string; label: string }> = {
   not_started: {
-    cls: "border-zinc-800 text-transparent hover:border-lime-300 border-zinc-800",
+    cls: "border-zinc-200 dark:border-zinc-800 text-transparent hover:border-lime-300 border-zinc-200 dark:border-zinc-800",
     glyph: "✓",
     label: "Not started — click to mark attempting",
   },

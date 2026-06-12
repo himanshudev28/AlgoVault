@@ -16,7 +16,7 @@ export default async function AppLayout({
      * scrolls, keeping the sidebar always visible on desktop. Flex-row puts
      * the sidebar and content side by side.
      */
-    <div className="flex h-screen overflow-hidden bg-zinc-950">
+    <div className="flex h-screen overflow-hidden bg-zinc-50 dark:bg-zinc-950">
       <Sidebar />
 
       {/*

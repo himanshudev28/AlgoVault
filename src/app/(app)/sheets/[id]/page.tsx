@@ -260,7 +260,7 @@ export default function SheetDetailPage() {
   const pct = mine.length ? Math.round((solved / mine.length) * 100) : 0;
 
   const inputCls =
-    "rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400";
+    "rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400";
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -279,7 +279,7 @@ export default function SheetDetailPage() {
               <div className="flex items-center gap-2">
                 <input
                   ref={renameRef}
-                  className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xl font-bold outline-none transition-colors focus:border-lime-400"
+                  className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xl font-bold outline-none transition-colors focus:border-lime-400"
                   value={sheetName}
                   onChange={(e) => setSheetName(e.target.value)}
                   onKeyDown={(e) => {
@@ -296,7 +296,7 @@ export default function SheetDetailPage() {
                 </button>
                 <button
                   onClick={() => setRenamingSheet(false)}
-                  className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-800 text-zinc-500 hover:bg-zinc-800 hover:bg-zinc-800"
+                  className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                   title="Cancel"
                 >
                   <XIcon className="size-4" />
@@ -335,7 +335,7 @@ export default function SheetDetailPage() {
             </span>
             <span>{pct}%</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-zinc-200 bg-zinc-800">
+          <div className="h-2 overflow-hidden rounded-full bg-zinc-200 bg-zinc-100 dark:bg-zinc-800">
             <div
               className="h-full rounded-full bg-linear-to-r from-lime-400 to-lime-500 transition-all duration-500"
               style={{ width: `${pct}%` }}
@@ -429,15 +429,15 @@ export default function SheetDetailPage() {
 
       {/* Search */}
       <input
-        className="mb-4 w-56 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 bg-zinc-900"
+        className="mb-4 w-56 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 bg-white dark:bg-zinc-900"
         placeholder="Search this sheet…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       {/* Question list */}
-      <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 border-zinc-800 bg-zinc-900/40">
-        <ul className="divide-y divide-zinc-800/60">
+      <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
+        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
           {mine.map((q) => {
             const row = getRow(q.id);
             const isEditing = editingId === q.id;
@@ -489,7 +489,7 @@ export default function SheetDetailPage() {
                       </button>
                       <button
                         onClick={cancelEdit}
-                        className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 hover:border-zinc-400"
+                        className="rounded-lg border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 hover:border-zinc-400"
                       >
                         Cancel
                       </button>

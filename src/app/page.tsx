@@ -39,6 +39,7 @@ function TopicIcon({ topic }: { topic: string }) {
   );
 }
 
+// Used only inside dark mock-UI preview cards — intentionally dark
 const TAG_COLORS: Record<string, string> = {
   easy:    "bg-lime-400/15 text-lime-300 border border-lime-400/20",
   "easy+": "bg-lime-400/10 text-lime-200 border border-lime-400/15",
@@ -56,26 +57,25 @@ export default async function Home() {
   const totalMedium = QUESTIONS.filter(q => q.tag === "medium" || q.tag === "medium+").length;
   const totalHard   = QUESTIONS.filter(q => q.tag === "hard").length;
 
-  // Topic stats for the grid section
   const topicStats = TOPICS.map(topic => ({
     topic,
     count: QUESTIONS.filter(q => q.topic === topic).length,
   }));
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
+    <div className="min-h-screen bg-white font-sans text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
 
       {/* ── Sticky nav ─────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-lime-400 to-lime-600 shadow-lg shadow-lime-400/20 group-hover:shadow-lime-400/30 transition-shadow">
+          <Link href="/" className="group flex items-center gap-2.5">
+            <div className="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-lime-400 to-lime-600 shadow-lg shadow-lime-400/20 transition-shadow group-hover:shadow-lime-400/30">
               <svg className="size-4 text-white" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
               </svg>
             </div>
             <span className="text-lg font-bold tracking-tight">
-              Algo<span className="text-lime-300">Vault</span>
+              Algo<span className="text-lime-600 dark:text-lime-300">Vault</span>
             </span>
           </Link>
 
@@ -86,7 +86,7 @@ export default async function Home() {
               { href: authed ? "/revision" : "#features", label: "Revision" },
               { href: authed ? "/visualizers" : "#features", label: "Visualizers" },
             ].map(({ href, label }) => (
-              <Link key={label} href={href} className="text-sm text-zinc-400 transition-colors hover:text-zinc-100">
+              <Link key={label} href={href} className="text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
                 {label}
               </Link>
             ))}
@@ -95,15 +95,15 @@ export default async function Home() {
           <div className="flex items-center gap-3">
             <ThemeToggle />
             {authed ? (
-              <Link href="/dashboard" className="rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-lime-400/20 transition-all hover:bg-lime-300 hover:shadow-lime-400/30">
+              <Link href="/dashboard" className="rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-zinc-950 shadow-lg shadow-lime-400/20 transition-all hover:bg-lime-300 hover:shadow-lime-400/30">
                 Open app →
               </Link>
             ) : (
               <>
-                <Link href="/sign-in" className="hidden text-sm text-zinc-400 transition-colors hover:text-zinc-100 sm:block">
+                <Link href="/sign-in" className="hidden text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 sm:block">
                   Sign in
                 </Link>
-                <Link href="/sign-up" className="rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-lime-400/20 transition-all hover:bg-lime-300">
+                <Link href="/sign-up" className="rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-zinc-950 shadow-lg shadow-lime-400/20 transition-all hover:bg-lime-300">
                   Get started free
                 </Link>
               </>
@@ -113,34 +113,33 @@ export default async function Home() {
       </header>
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-zinc-950">
-        {/* Grid + radial glow */}
+      <section className="relative overflow-hidden bg-zinc-50 dark:bg-zinc-950">
         <div className="hero-grid absolute inset-0 opacity-60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(16,185,129,0.12),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(163,230,53,0.08),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(163,230,53,0.12),transparent)]" />
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-28 md:pt-28 md:pb-36">
+        <div className="relative mx-auto max-w-6xl px-6 pb-28 pt-20 md:pb-36 md:pt-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             {/* Left — copy */}
             <div>
-              <div className="animate-in mb-6 inline-flex items-center gap-2 rounded-full border border-lime-400/25 bg-lime-400/10 px-4 py-1.5 text-xs font-medium text-lime-300">
-                <span className="size-1.5 rounded-full bg-lime-300 animate-pulse" />
+              <div className="animate-in mb-6 inline-flex items-center gap-2 rounded-full border border-lime-500/25 bg-lime-500/10 px-4 py-1.5 text-xs font-medium text-lime-600 dark:border-lime-400/25 dark:bg-lime-400/10 dark:text-lime-300">
+                <span className="size-1.5 animate-pulse rounded-full bg-lime-500 dark:bg-lime-300" />
                 SM-2 spaced repetition · Groq AI · {QUESTIONS.length} curated problems
               </div>
 
-              <h1 className="animate-in delay-100 text-5xl font-black tracking-tight leading-[1.05] md:text-6xl">
+              <h1 className="animate-in delay-100 text-5xl font-black leading-[1.05] tracking-tight md:text-6xl">
                 Stop re-solving.<br />
                 <span className="gradient-text">Start remembering.</span>
               </h1>
 
-              <p className="animate-in delay-200 mt-6 text-lg leading-relaxed text-zinc-400 max-w-lg">
-                The forgetting curve is brutal. AlgoVault fights it — spaced repetition tells you <em className="text-zinc-300 not-italic font-medium">exactly what to review today</em>, AI explains without spoiling, and your notes stay forever.
+              <p className="animate-in delay-200 mt-6 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+                The forgetting curve is brutal. AlgoVault fights it — spaced repetition tells you <em className="font-medium not-italic text-zinc-800 dark:text-zinc-300">exactly what to review today</em>, AI explains without spoiling, and your notes stay forever.
               </p>
 
               <div className="animate-in delay-300 mt-8 flex flex-wrap items-center gap-3">
-                <Link href={cta} className="glow-emerald-sm rounded-xl bg-lime-400 px-6 py-3 text-sm font-bold text-zinc-950 transition-all hover:bg-lime-300 hover:scale-[1.02]">
+                <Link href={cta} className="glow-emerald-sm rounded-xl bg-lime-400 px-6 py-3 text-sm font-bold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-lime-300">
                   Start tracking — free
                 </Link>
-                <Link href={authed ? "/problems" : "/sign-in"} className="rounded-xl border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 transition-all hover:border-zinc-500 hover:text-zinc-100">
+                <Link href={authed ? "/problems" : "/sign-in"} className="rounded-xl border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 transition-all hover:border-zinc-400 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500 dark:hover:text-zinc-100">
                   Browse {QUESTIONS.length} problems →
                 </Link>
               </div>
@@ -154,41 +153,39 @@ export default async function Home() {
                   { n: 11,               label: "Visualizers" },
                 ].map(({ n, label }) => (
                   <div key={label} className="flex flex-col">
-                    <span className="text-2xl font-black text-zinc-100">{n}<span className="text-lime-300">+</span></span>
+                    <span className="text-2xl font-black text-zinc-900 dark:text-zinc-100">{n}<span className="text-lime-500 dark:text-lime-300">+</span></span>
                     <span className="text-xs text-zinc-500">{label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right — mock UI card */}
+            {/* Right — mock UI card (intentionally dark — shows app preview) */}
             <div className="animate-in delay-300 animate-float hidden lg:block">
-              <div className="glow-emerald rounded-2xl border border-zinc-800 bg-zinc-900/80 backdrop-blur overflow-hidden shadow-2xl">
-                {/* Mock header */}
+              <div className="glow-emerald overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/80 shadow-2xl backdrop-blur">
                 <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <div className="size-2.5 rounded-full bg-red-500/80" />
                     <div className="size-2.5 rounded-full bg-amber-500/80" />
                     <div className="size-2.5 rounded-full bg-lime-400/80" />
                   </div>
-                  <span className="text-xs text-zinc-500 font-mono">algvault.app/problems</span>
+                  <span className="font-mono text-xs text-zinc-500">algvault.app/problems</span>
                   <div className="size-4" />
                 </div>
-                {/* Mock problem rows */}
                 <div className="divide-y divide-zinc-800/50">
                   {[
-                    { n: "1.", title: "Two Sum",                   tag: "easy",   solved: true,  stars: 4, next: "Tomorrow" },
-                    { n: "2.", title: "Valid Parentheses",         tag: "easy",   solved: true,  stars: 3, next: "In 3 days" },
-                    { n: "3.", title: "Longest Substring No Repeat",tag:"medium", solved: false, stars: 2, next: "Not started" },
-                    { n: "4.", title: "Merge Two Sorted Lists",    tag: "easy",   solved: false, stars: 0, next: "Not started" },
-                    { n: "5.", title: "Maximum Subarray",          tag: "medium", solved: true,  stars: 5, next: "In 7 days" },
+                    { n: "1.", title: "Two Sum",                   tag: "easy",   solved: true,  stars: 4 },
+                    { n: "2.", title: "Valid Parentheses",         tag: "easy",   solved: true,  stars: 3 },
+                    { n: "3.", title: "Longest Substring No Repeat",tag:"medium", solved: false, stars: 2 },
+                    { n: "4.", title: "Merge Two Sorted Lists",    tag: "easy",   solved: false, stars: 0 },
+                    { n: "5.", title: "Maximum Subarray",          tag: "medium", solved: true,  stars: 5 },
                   ].map((q) => (
                     <div key={q.title} className="flex items-center gap-3 px-4 py-2.5">
                       <div className={`flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${q.solved ? "bg-lime-400/20 text-lime-300" : "border border-zinc-700 text-zinc-600"}`}>
                         {q.solved ? "✓" : ""}
                       </div>
                       <span className={`flex-1 truncate text-xs font-medium ${q.solved ? "text-zinc-400" : "text-zinc-200"}`}>{q.n} {q.title}</span>
-                      <div className="flex items-center gap-1.5 shrink-0">
+                      <div className="flex shrink-0 items-center gap-1.5">
                         {q.stars > 0 && (
                           <span className="text-[10px] text-amber-400">{"★".repeat(q.stars)}{"☆".repeat(5 - q.stars)}</span>
                         )}
@@ -197,13 +194,12 @@ export default async function Home() {
                     </div>
                   ))}
                 </div>
-                {/* Mock footer */}
-                <div className="border-t border-zinc-800 px-4 py-2.5 flex items-center justify-between">
+                <div className="flex items-center justify-between border-t border-zinc-800 px-4 py-2.5">
                   <span className="text-[11px] text-zinc-500">3 / 5 solved · 40%</span>
-                  <div className="h-1.5 flex-1 mx-4 overflow-hidden rounded-full bg-zinc-800">
+                  <div className="mx-4 h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-800">
                     <div className="h-full w-[40%] rounded-full bg-linear-to-r from-lime-400 to-lime-500" />
                   </div>
-                  <span className="text-[11px] text-lime-300 font-medium">2 due today</span>
+                  <span className="text-[11px] font-medium text-lime-300">2 due today</span>
                 </div>
               </div>
             </div>
@@ -212,13 +208,13 @@ export default async function Home() {
       </section>
 
       {/* ── Difficulty strip ───────────────────────────────────────── */}
-      <div className="border-y border-zinc-800/50 bg-zinc-900/30">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-12 px-6 py-5 flex-wrap">
+      <div className="border-y border-zinc-200 bg-zinc-100 dark:border-zinc-800/50 dark:bg-zinc-900/30">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-12 px-6 py-5">
           {[
-            { label: "Easy",    count: totalEasy,   color: "text-lime-300" },
-            { label: "Medium",  count: totalMedium, color: "text-amber-400" },
-            { label: "Hard",    count: totalHard,   color: "text-red-400" },
-            { label: "Topics",  count: TOPICS.length, color: "text-lime-400" },
+            { label: "Easy",    count: totalEasy,     color: "text-green-600 dark:text-lime-300" },
+            { label: "Medium",  count: totalMedium,   color: "text-amber-500 dark:text-amber-400" },
+            { label: "Hard",    count: totalHard,     color: "text-red-500 dark:text-red-400" },
+            { label: "Topics",  count: TOPICS.length, color: "text-lime-600 dark:text-lime-400" },
           ].map(({ label, count, color }) => (
             <div key={label} className="flex items-center gap-2.5">
               <span className={`text-3xl font-black tabular-nums ${color}`}>{count}</span>
@@ -232,13 +228,13 @@ export default async function Home() {
       <section id="features" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="mb-3 text-sm font-bold tracking-widest text-lime-400 uppercase">01 — Never Forget</p>
+            <p className="mb-3 text-sm font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">01 — Never Forget</p>
             <h2 className="text-3xl font-black tracking-tight md:text-4xl">
               Anki-style revision.<br />
               <span className="gradient-text">Built for DSA.</span>
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-zinc-400">
-              Every problem you solve seeds a review on the SM-2 algorithm — just like Anki. Rate your recall <strong className="text-zinc-300 font-semibold">Again / Hard / Good / Easy</strong> and the interval adapts. Problems you struggle with come back sooner. Problems you know well? Weeks later.
+            <p className="mt-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Every problem you solve seeds a review on the SM-2 algorithm — just like Anki. Rate your recall <strong className="font-semibold text-zinc-800 dark:text-zinc-300">Again / Hard / Good / Easy</strong> and the interval adapts.
             </p>
             <ul className="mt-6 space-y-3">
               {[
@@ -247,22 +243,22 @@ export default async function Home() {
                 "Confidence stars (1–5) per problem",
                 "Streak counter and 20-week heatmap",
               ].map(s => (
-                <li key={s} className="flex items-start gap-2.5 text-sm text-zinc-400">
-                  <span className="mt-0.5 size-4 shrink-0 rounded-full bg-lime-400/20 text-lime-300 flex items-center justify-center text-[10px]">✓</span>
+                <li key={s} className="flex items-start gap-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+                  <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-lime-500/20 text-[10px] text-lime-600 dark:bg-lime-400/20 dark:text-lime-300">✓</span>
                   {s}
                 </li>
               ))}
             </ul>
-            <Link href={cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-300 hover:text-lime-200 transition-colors">
+            <Link href={cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-600 transition-colors hover:text-lime-500 dark:text-lime-300 dark:hover:text-lime-200">
               Start your revision streak →
             </Link>
           </div>
 
-          {/* Revision mock UI */}
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 overflow-hidden shadow-xl">
-            <div className="border-b border-zinc-800 px-5 py-3.5 flex items-center justify-between">
+          {/* Revision mock UI — stays dark as app preview */}
+          <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl">
+            <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3.5">
               <span className="text-sm font-semibold text-zinc-200">Revision due today</span>
-              <span className="rounded-full bg-red-500/15 border border-red-500/20 px-2.5 py-0.5 text-xs font-bold text-red-400">4 due</span>
+              <span className="rounded-full border border-red-500/20 bg-red-500/15 px-2.5 py-0.5 text-xs font-bold text-red-400">4 due</span>
             </div>
             <div className="divide-y divide-zinc-800/40">
               {[
@@ -272,22 +268,22 @@ export default async function Home() {
                 { title: "Valid Parentheses",           topic: "Stack & Queue",        stars: 5, tag: "easy" },
               ].map((q) => (
                 <div key={q.title} className="flex items-center gap-3 px-5 py-3">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 border border-amber-500/20">
+                  <div className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-amber-500/20 bg-amber-500/10">
                     <svg className="size-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
                   </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium text-zinc-200">{q.title}</p>
                     <p className="text-[11px] text-zinc-500">{q.topic}</p>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex shrink-0 items-center gap-2">
                     <span className="text-xs text-amber-400">{"★".repeat(q.stars)}</span>
                     <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-semibold ${TAG_COLORS[q.tag]}`}>{q.tag}</span>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="border-t border-zinc-800 px-5 py-3 flex gap-2">
-              <div className="flex-1 rounded-lg bg-lime-400/10 border border-lime-400/20 py-2 text-center text-xs font-bold text-lime-300">Good</div>
+            <div className="flex gap-2 border-t border-zinc-800 px-5 py-3">
+              <div className="flex-1 rounded-lg border border-lime-400/20 bg-lime-400/10 py-2 text-center text-xs font-bold text-lime-300">Good</div>
               <div className="flex-1 rounded-lg bg-zinc-800 py-2 text-center text-xs font-medium text-zinc-400">Hard</div>
               <div className="flex-1 rounded-lg bg-zinc-800 py-2 text-center text-xs font-medium text-zinc-400">Again</div>
             </div>
@@ -296,30 +292,30 @@ export default async function Home() {
       </section>
 
       {/* ── Feature 02 — AI Hints ──────────────────────────────────── */}
-      <section className="border-y border-zinc-800/40 bg-zinc-900/20">
+      <section className="border-y border-zinc-200 bg-zinc-50 dark:border-zinc-800/40 dark:bg-zinc-900/20">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* AI mock UI — left */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 overflow-hidden shadow-xl order-2 lg:order-1">
-              <div className="border-b border-zinc-800 px-5 py-3.5 flex items-center justify-between">
+            {/* AI mock UI — stays dark as app preview */}
+            <div className="order-2 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/80 shadow-xl lg:order-1">
+              <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3.5">
                 <div className="flex items-center gap-2.5">
-                  <div className="size-2 rounded-full bg-lime-300 animate-pulse" />
+                  <div className="size-2 animate-pulse rounded-full bg-lime-300" />
                   <span className="text-sm font-semibold text-zinc-200">AI Explanation</span>
                 </div>
-                <span className="text-xs text-zinc-500 font-mono">Hint 2 of 4</span>
+                <span className="font-mono text-xs text-zinc-500">Hint 2 of 4</span>
               </div>
-              <div className="p-5 space-y-3">
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-400 leading-relaxed">
-                  Think about what data structure gives you <span className="text-lime-300 font-medium">O(1) lookup</span>. You need to check if a complement exists for each element...
+              <div className="space-y-3 p-5">
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm leading-relaxed text-zinc-400">
+                  Think about what data structure gives you <span className="font-medium text-lime-300">O(1) lookup</span>. You need to check if a complement exists for each element...
                 </div>
                 <div className="flex gap-2">
                   {["Hint 1", "Hint 2", "Approach", "Solution"].map((step, i) => (
-                    <div key={step} className={`flex-1 rounded-lg py-1.5 text-center text-[10px] font-semibold ${i === 1 ? "bg-lime-400/20 border border-lime-400/30 text-lime-300" : i < 1 ? "bg-zinc-800 text-zinc-400" : "bg-zinc-900 border border-zinc-800 text-zinc-600"}`}>
+                    <div key={step} className={`flex-1 rounded-lg py-1.5 text-center text-[10px] font-semibold ${i === 1 ? "border border-lime-400/30 bg-lime-400/20 text-lime-300" : i < 1 ? "bg-zinc-800 text-zinc-400" : "border border-zinc-800 bg-zinc-900 text-zinc-600"}`}>
                       {step}
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-zinc-800 pt-3 flex items-center gap-2">
+                <div className="flex items-center gap-2 border-t border-zinc-800 pt-3">
                   <span className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400">Explain simpler</span>
                   <span className="rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400">Hinglish mode</span>
                 </div>
@@ -328,12 +324,12 @@ export default async function Home() {
 
             {/* Copy — right */}
             <div className="order-1 lg:order-2">
-              <p className="mb-3 text-sm font-bold tracking-widest text-lime-400 uppercase">02 — AI that teaches</p>
+              <p className="mb-3 text-sm font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">02 — AI that teaches</p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                 Hints that guide.<br />
                 <span className="gradient-text">Never spoil.</span>
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-zinc-400">
+              <p className="mt-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
                 Powered by Groq (llama-3.3-70b), every problem has 4 staged hints — each one nudges you forward without giving the answer away. Only request what you need.
               </p>
               <ul className="mt-6 space-y-3">
@@ -343,8 +339,8 @@ export default async function Home() {
                   "Hinglish mode for native learners",
                   "All responses cached — zero duplicate API calls",
                 ].map(s => (
-                  <li key={s} className="flex items-start gap-2.5 text-sm text-zinc-400">
-                    <span className="mt-0.5 size-4 shrink-0 rounded-full bg-lime-400/20 text-lime-300 flex items-center justify-center text-[10px]">✓</span>
+                  <li key={s} className="flex items-start gap-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+                    <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-lime-500/20 text-[10px] text-lime-600 dark:bg-lime-400/20 dark:text-lime-300">✓</span>
                     {s}
                   </li>
                 ))}
@@ -358,15 +354,15 @@ export default async function Home() {
       <section id="sheets" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <div className="grid items-start gap-12 lg:grid-cols-2">
           <div>
-            <p className="mb-3 text-sm font-bold tracking-widest text-lime-400 uppercase">03 — Every sheet you love</p>
+            <p className="mb-3 text-sm font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">03 — Every sheet you love</p>
             <h2 className="text-3xl font-black tracking-tight md:text-4xl">
               Import. Track.<br />
               <span className="gradient-text">Own your progress.</span>
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-zinc-400">
-              Love Striver? Babbar? Apna College? One click imports any popular sheet into your tracker — complete with status, notes, stars, revision, AI hints, and code runner. Or paste a LeetCode/GFG URL and add any problem instantly.
+            <p className="mt-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+              Love Striver? Babbar? Apna College? One click imports any popular sheet into your tracker — complete with status, notes, stars, revision, AI hints, and code runner.
             </p>
-            <Link href={authed ? "/bhaiya-sheets" : cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-300 hover:text-lime-200 transition-colors">
+            <Link href={authed ? "/bhaiya-sheets" : cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-600 transition-colors hover:text-lime-500 dark:text-lime-300 dark:hover:text-lime-200">
               Browse all sheets →
             </Link>
           </div>
@@ -377,16 +373,16 @@ export default async function Home() {
               <Link
                 key={sheet.id}
                 href={authed ? "/bhaiya-sheets" : "/sign-up"}
-                className="group rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-lime-400/30 hover:bg-zinc-900/80 cursor-pointer block"
+                className="group block cursor-pointer rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-lime-500/30 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:border-lime-400/30 dark:hover:bg-zinc-900/80"
               >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <p className="text-sm font-semibold text-zinc-200 leading-snug group-hover:text-white transition-colors">{sheet.name}</p>
-                  <span className="shrink-0 rounded-lg bg-zinc-800 px-2 py-0.5 text-[11px] font-medium tabular-nums text-zinc-400">{sheet.questionCount}+</span>
+                <div className="mb-2 flex items-start justify-between gap-2">
+                  <p className="text-sm font-semibold leading-snug text-zinc-800 transition-colors group-hover:text-zinc-950 dark:text-zinc-200 dark:group-hover:text-white">{sheet.name}</p>
+                  <span className="shrink-0 rounded-lg bg-zinc-100 px-2 py-0.5 text-[11px] font-medium tabular-nums text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">{sheet.questionCount}+</span>
                 </div>
-                <p className="text-[11px] text-zinc-500 truncate">{sheet.author}</p>
+                <p className="truncate text-[11px] text-zinc-500">{sheet.author}</p>
                 <div className="mt-2.5 flex flex-wrap gap-1">
                   {sheet.topics.slice(0, 3).map(t => (
-                    <span key={t} className="rounded-md bg-lime-400/8 px-1.5 py-0.5 text-[10px] text-lime-400">{t}</span>
+                    <span key={t} className="rounded-md bg-lime-500/8 px-1.5 py-0.5 text-[10px] text-lime-600 dark:bg-lime-400/8 dark:text-lime-400">{t}</span>
                   ))}
                 </div>
               </Link>
@@ -395,34 +391,32 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── Feature 04 — Visualizers + Code runner ─────────────────── */}
-      <section className="border-y border-zinc-800/40 bg-zinc-900/20">
+      {/* ── Feature 04 — Visualizers ───────────────────────────────── */}
+      <section className="border-y border-zinc-200 bg-zinc-50 dark:border-zinc-800/40 dark:bg-zinc-900/20">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Visualizer mock */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 overflow-hidden shadow-xl">
-              <div className="border-b border-zinc-800 px-5 py-3.5 flex items-center justify-between">
+            {/* Visualizer mock — stays dark as app preview */}
+            <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/80 shadow-xl">
+              <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3.5">
                 <span className="text-sm font-semibold text-zinc-200">Bubble Sort Visualizer</span>
                 <div className="flex gap-2">
-                  <span className="rounded-lg bg-lime-400/15 border border-lime-400/20 px-2.5 py-1 text-[10px] font-bold text-lime-300">▶ Play</span>
-                  <span className="rounded-lg bg-zinc-800 border border-zinc-700 px-2.5 py-1 text-[10px] text-zinc-400">⟲ Reset</span>
+                  <span className="rounded-lg border border-lime-400/20 bg-lime-400/15 px-2.5 py-1 text-[10px] font-bold text-lime-300">▶ Play</span>
+                  <span className="rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-[10px] text-zinc-400">⟲ Reset</span>
                 </div>
               </div>
               <div className="p-5">
-                {/* Array bars */}
-                <div className="flex items-end gap-1.5 h-24 mb-4">
+                <div className="mb-4 flex h-24 items-end gap-1.5">
                   {[64, 34, 25, 12, 22, 11, 90, 45, 78, 56].map((h, i) => (
                     <div
                       key={i}
                       style={{ height: `${(h / 90) * 100}%` }}
-                      className={`flex-1 rounded-t-sm transition-all ${i === 0 ? "bg-lime-400" : i === 1 ? "bg-lime-400" : "bg-zinc-700"}`}
+                      className={`flex-1 rounded-t-sm transition-all ${i === 0 || i === 1 ? "bg-lime-400" : "bg-zinc-700"}`}
                     />
                   ))}
                 </div>
-                {/* Step counter */}
                 <div className="flex items-center justify-between text-xs text-zinc-500">
                   <span>Step 3 / 45</span>
-                  <span className="text-zinc-400">Comparing indices <span className="text-lime-300 font-mono">0</span> and <span className="text-lime-300 font-mono">1</span></span>
+                  <span className="text-zinc-400">Comparing <span className="font-mono text-lime-300">0</span> and <span className="font-mono text-lime-300">1</span></span>
                 </div>
                 <div className="mt-3 h-1 rounded-full bg-zinc-800">
                   <div className="h-full w-[7%] rounded-full bg-linear-to-r from-lime-400 to-lime-500" />
@@ -432,23 +426,23 @@ export default async function Home() {
 
             {/* Copy */}
             <div>
-              <p className="mb-3 text-sm font-bold tracking-widest text-lime-400 uppercase">04 — See it before you code it</p>
+              <p className="mb-3 text-sm font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">04 — See it before you code it</p>
               <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                 11 algorithm<br />
                 <span className="gradient-text">visualizers.</span>
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-zinc-400">
-                Step through algorithms frame by frame. Play, pause, scrub, randomize. Watch the array sort, the tree grow, the BFS spread — <em className="text-zinc-300 not-italic">then</em> write the code.
+              <p className="mt-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+                Step through algorithms frame by frame. Play, pause, scrub, randomize. Watch the array sort, the tree grow, the BFS spread — <em className="not-italic text-zinc-800 dark:text-zinc-300">then</em> write the code.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-2">
-                {["Bubble Sort", "Merge Sort", "Quick Sort", "Binary Search", "BFS Grid", "DFS Grid", "Two Pointers", "Sliding Window", "Kadane's Algo", "Insertion Sort", "Selection Sort"].slice(0,8).map(v => (
-                  <div key={v} className="flex items-center gap-2 text-xs text-zinc-500">
-                    <div className="size-1.5 rounded-full bg-lime-400/60" />
+                {["Bubble Sort", "Merge Sort", "Quick Sort", "Binary Search", "BFS Grid", "DFS Grid", "Two Pointers", "Sliding Window"].map(v => (
+                  <div key={v} className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-500">
+                    <div className="size-1.5 rounded-full bg-lime-500/60 dark:bg-lime-400/60" />
                     {v}
                   </div>
                 ))}
               </div>
-              <Link href={authed ? "/visualizers" : cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-300 hover:text-lime-200 transition-colors">
+              <Link href={authed ? "/visualizers" : cta} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-lime-600 transition-colors hover:text-lime-500 dark:text-lime-300 dark:hover:text-lime-200">
                 Open visualizers →
               </Link>
             </div>
@@ -456,28 +450,28 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ── Topics grid (Crackr-style phases) ─────────────────────── */}
+      {/* ── Topics grid ────────────────────────────────────────────── */}
       <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-bold tracking-widest text-lime-400 uppercase">The problem set</p>
+          <p className="mb-3 text-sm font-bold uppercase tracking-widest text-lime-600 dark:text-lime-400">The problem set</p>
           <h2 className="text-3xl font-black tracking-tight md:text-4xl">
             {QUESTIONS.length} problems across<br />
             <span className="gradient-text">{TOPICS.length} topics</span>
           </h2>
-          <p className="mt-4 text-zinc-400 max-w-xl mx-auto">Curated for placement prep — progressive difficulty within every topic, from arrays to tries.</p>
+          <p className="mx-auto mt-4 max-w-xl text-zinc-600 dark:text-zinc-400">Curated for placement prep — progressive difficulty within every topic, from arrays to tries.</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {topicStats.map(({ topic, count }) => (
             <Link
               key={topic}
               href={authed ? `/problems?topic=${encodeURIComponent(topic)}` : cta}
-              className="group flex items-center gap-3.5 rounded-xl border border-zinc-800 bg-zinc-900/40 px-4 py-3.5 transition-all hover:border-lime-400/30 hover:bg-zinc-900/80"
+              className="group flex items-center gap-3.5 rounded-xl border border-zinc-200 bg-white px-4 py-3.5 transition-all hover:border-lime-500/30 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/40 dark:hover:border-lime-400/30 dark:hover:bg-zinc-900/80"
             >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-lime-400/10 border border-lime-400/15 text-lime-300 group-hover:bg-lime-400/15 transition-colors">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-lime-500/15 bg-lime-500/10 text-lime-600 transition-colors group-hover:bg-lime-500/15 dark:border-lime-400/15 dark:bg-lime-400/10 dark:text-lime-300 dark:group-hover:bg-lime-400/15">
                 <TopicIcon topic={topic} />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-zinc-200 group-hover:text-white truncate">{topic}</p>
+                <p className="truncate text-sm font-semibold text-zinc-700 group-hover:text-zinc-900 dark:text-zinc-200 dark:group-hover:text-white">{topic}</p>
                 <p className="text-xs text-zinc-500">{count} problems</p>
               </div>
             </Link>
@@ -486,25 +480,25 @@ export default async function Home() {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-t border-zinc-800/60">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,rgba(16,185,129,0.08),transparent)]" />
+      <section className="relative overflow-hidden border-t border-zinc-200 dark:border-zinc-800/60">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,rgba(163,230,53,0.05),transparent)] dark:bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,rgba(163,230,53,0.08),transparent)]" />
         <div className="relative mx-auto max-w-3xl px-6 py-28 text-center md:py-36">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-lime-400/20 bg-lime-400/8 px-4 py-1.5 text-xs font-medium text-lime-300">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/8 px-4 py-1.5 text-xs font-medium text-lime-600 dark:border-lime-400/20 dark:bg-lime-400/8 dark:text-lime-300">
             Free to start. Always.
           </div>
           <h2 className="text-4xl font-black tracking-tight md:text-5xl">
             Ready to actually<br />
             <span className="gradient-text">remember your DSA?</span>
           </h2>
-          <p className="mt-5 text-lg text-zinc-400">
+          <p className="mt-5 text-lg text-zinc-600 dark:text-zinc-400">
             Join engineers who track smarter, revise on schedule, and walk into interviews knowing their solutions cold.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link href={cta} className="glow-emerald rounded-xl bg-lime-400 px-8 py-3.5 text-base font-bold text-zinc-950 transition-all hover:bg-lime-300 hover:scale-[1.02]">
+            <Link href={cta} className="glow-emerald rounded-xl bg-lime-400 px-8 py-3.5 text-base font-bold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-lime-300">
               {authed ? "Go to dashboard →" : "Start for free →"}
             </Link>
             {!authed && (
-              <Link href="/sign-in" className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
+              <Link href="/sign-in" className="text-sm text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300">
                 Already have an account? Sign in
               </Link>
             )}
@@ -513,23 +507,21 @@ export default async function Home() {
       </section>
 
       {/* ── Footer ─────────────────────────────────────────────────── */}
-      <footer className="border-t border-zinc-800/60 bg-zinc-950">
+      <footer className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800/60 dark:bg-zinc-950">
         <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {/* Brand */}
             <div className="col-span-2 sm:col-span-1">
-              <Link href="/" className="flex items-center gap-2 mb-4">
+              <Link href="/" className="mb-4 flex items-center gap-2">
                 <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-lime-400 to-lime-600">
                   <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/></svg>
                 </div>
-                <span className="font-bold">Algo<span className="text-lime-300">Vault</span></span>
+                <span className="font-bold">Algo<span className="text-lime-600 dark:text-lime-300">Vault</span></span>
               </Link>
-              <p className="text-xs text-zinc-500 leading-relaxed">Revision-first DSA tracker for placement prep.</p>
+              <p className="text-xs leading-relaxed text-zinc-500">Revision-first DSA tracker for placement prep.</p>
             </div>
 
-            {/* Practice */}
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">Practice</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Practice</p>
               <ul className="space-y-2">
                 {[
                   { href: authed ? "/problems" : "/sign-in", label: "Problems" },
@@ -537,42 +529,40 @@ export default async function Home() {
                   { href: authed ? "/mock" : "/sign-in",     label: "Mock Interview" },
                   { href: authed ? "/bhaiya-sheets" : "/sign-in", label: "Bhaiya Sheets" },
                 ].map(({ href, label }) => (
-                  <li key={label}><Link href={href} className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">{label}</Link></li>
+                  <li key={label}><Link href={href} className="text-xs text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300">{label}</Link></li>
                 ))}
               </ul>
             </div>
 
-            {/* Learn */}
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">Learn</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Learn</p>
               <ul className="space-y-2">
                 {[
                   { href: authed ? "/visualizers" : "/sign-in", label: "Visualizers" },
                   { href: authed ? "/sheets" : "/sign-in",      label: "My Sheets" },
                   { href: authed ? "/dashboard" : "/sign-in",   label: "Dashboard" },
                 ].map(({ href, label }) => (
-                  <li key={label}><Link href={href} className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">{label}</Link></li>
+                  <li key={label}><Link href={href} className="text-xs text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300">{label}</Link></li>
                 ))}
               </ul>
             </div>
 
-            {/* Account */}
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">Account</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Account</p>
               <ul className="space-y-2">
                 {(authed
                   ? [{ href: "/dashboard", label: "Dashboard" }]
                   : [{ href: "/sign-in", label: "Sign in" }, { href: "/sign-up", label: "Get started" }]
                 ).map(({ href, label }) => (
-                  <li key={label}><Link href={href} className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">{label}</Link></li>
+                  <li key={label}><Link href={href} className="text-xs text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300">{label}</Link></li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-zinc-800/60 pt-6 sm:flex-row">
-            <p className="text-xs text-zinc-600">© 2026 AlgoVault · Built for engineers, by engineers</p>
-            <p className="text-xs text-zinc-600">Problems link to their original platforms — statements stay where they belong.</p>
+          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-zinc-200 pt-6 dark:border-zinc-800/60 sm:flex-row">
+            <p className="text-xs text-zinc-400 dark:text-zinc-600">© 2026 AlgoVault · Built for engineers, by engineers</p>
+            <p className="text-xs text-zinc-400 dark:text-zinc-600">Problems link to their original platforms — statements stay where they belong.</p>
           </div>
         </div>
       </footer>

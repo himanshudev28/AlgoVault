@@ -152,9 +152,9 @@ export default function ProblemDetailPage() {
   }
 
   const card =
-    "rounded-2xl border border-zinc-800 bg-zinc-900 p-5 border-zinc-800 bg-zinc-900/40";
+    "rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40";
   const textarea =
-    "w-full resize-y rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 border-zinc-800";
+    "w-full resize-y rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 border-zinc-200 dark:border-zinc-800";
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -178,7 +178,7 @@ export default function ProblemDetailPage() {
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <DifficultyBadge tag={question.tag} />
               <PlatformBadge platform={question.platform} />
-              <span className="rounded-md border border-zinc-800 px-1.5 py-0.5 text-[11px] font-medium text-zinc-500 border-zinc-800">
+              <span className="rounded-md border border-zinc-200 dark:border-zinc-800 px-1.5 py-0.5 text-[11px] font-medium text-zinc-500 border-zinc-200 dark:border-zinc-800">
                 {question.topic}
               </span>
               {question.link && (
@@ -201,7 +201,7 @@ export default function ProblemDetailPage() {
           </span>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-zinc-800 pt-4 text-sm border-zinc-800/60">
+        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-zinc-200 dark:border-zinc-800 pt-4 text-sm border-zinc-200 dark:border-zinc-800/60">
           <label className="flex items-center gap-2 text-xs text-zinc-500">
             Confidence
             <Stars value={row.confidence} onChange={(v) => save({ confidence: v })} />
@@ -211,16 +211,16 @@ export default function ProblemDetailPage() {
             <span className="inline-flex items-center gap-1.5">
               <button
                 onClick={() => save({ attempts: Math.max(0, row.attempts - 1) })}
-                className="size-6 rounded-md border border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-800"
+                className="size-6 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-200 dark:border-zinc-800"
               >
                 −
               </button>
-              <span className="w-6 text-center font-semibold tabular-nums text-zinc-100">
+              <span className="w-6 text-center font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
                 {row.attempts}
               </span>
               <button
                 onClick={() => save({ attempts: row.attempts + 1 })}
-                className="size-6 rounded-md border border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-800"
+                className="size-6 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-200 dark:border-zinc-800"
               >
                 +
               </button>
@@ -231,7 +231,7 @@ export default function ProblemDetailPage() {
             className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               row.bookmark
                 ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
-                : "border-zinc-800 text-zinc-500 border-zinc-800"
+                : "border-zinc-200 dark:border-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-800"
             }`}
           >
             🔖 {row.bookmark ? "Bookmarked" : "Bookmark"}
@@ -241,7 +241,7 @@ export default function ProblemDetailPage() {
             className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               row.needsRevision
                 ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
-                : "border-zinc-800 text-zinc-500 border-zinc-800"
+                : "border-zinc-200 dark:border-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-800"
             }`}
           >
             🔁 {row.needsRevision ? "Marked for revision" : "Mark for revision"}
@@ -284,14 +284,14 @@ export default function ProblemDetailPage() {
               className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
                 aiOpen[s.key]
                   ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
-                  : "border-zinc-800 hover:border-lime-300 border-zinc-800"
+                  : "border-zinc-200 dark:border-zinc-800 hover:border-lime-300 border-zinc-200 dark:border-zinc-800"
               }`}
             >
               {aiLoading === s.key && <Spinner className="size-3" />}
               {s.label}
             </button>
           ))}
-          <span className="mx-1 hidden w-px bg-zinc-200 sm:block bg-zinc-800" />
+          <span className="mx-1 hidden w-px bg-zinc-200 sm:block bg-zinc-100 dark:bg-zinc-800" />
           {AI_EXTRAS.map((s) => (
             <button
               key={s.key}
@@ -300,7 +300,7 @@ export default function ProblemDetailPage() {
               className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
                 aiOpen[s.key]
                   ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
-                  : "border-zinc-800 hover:border-lime-300 border-zinc-800"
+                  : "border-zinc-200 dark:border-zinc-800 hover:border-lime-300 border-zinc-200 dark:border-zinc-800"
               }`}
             >
               {aiLoading === s.key && <Spinner className="size-3" />}
@@ -314,7 +314,7 @@ export default function ProblemDetailPage() {
           .map((s) => (
             <div
               key={s.key}
-              className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/60 p-4/60"
+              className="mt-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-4/60"
             >
               <div className="mb-1 text-xs font-semibold text-lime-600 dark:text-lime-300">
                 {s.label}
@@ -361,7 +361,7 @@ export default function ProblemDetailPage() {
             </p>
           </div>
           <select
-            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs font-medium outline-none focus:border-lime-400 border-zinc-800"
+            className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs font-medium outline-none focus:border-lime-400 border-zinc-200 dark:border-zinc-800"
             value={row.solutionLanguage}
             onChange={(e) => save({ solutionLanguage: e.target.value })}
           >

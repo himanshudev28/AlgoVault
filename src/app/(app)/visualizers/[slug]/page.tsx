@@ -15,7 +15,7 @@ const ROLE_COLORS: Record<Role, string> = {
 };
 
 const GRID_COLORS: Record<number, string> = {
-  0: "bg-zinc-200 bg-zinc-800",
+  0: "bg-zinc-200 bg-zinc-100 dark:bg-zinc-800",
   1: "bg-zinc-9000 dark:bg-zinc-600",
   2: "bg-lime-400/70",
   3: "bg-amber-300",
@@ -87,7 +87,7 @@ export default function VisualizerPlayerPage() {
   const maxVal = frame?.kind === "array" ? Math.max(...frame.arr.map(Math.abs), 1) : 1;
 
   const ctl =
-    "rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium transition-colors hover:border-lime-300 disabled:opacity-40 border-zinc-800";
+    "rounded-lg border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 text-xs font-medium transition-colors hover:border-lime-300 disabled:opacity-40 border-zinc-200 dark:border-zinc-800";
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -106,7 +106,7 @@ export default function VisualizerPlayerPage() {
       </div>
 
       {/* Stage */}
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5 border-zinc-800 bg-zinc-900/40">
+      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
         {frame?.kind === "array" && (
           <div className="flex h-56 items-end justify-center gap-1">
             {frame.arr.map((v, i) => {
@@ -179,7 +179,7 @@ export default function VisualizerPlayerPage() {
             🎲 Randomize
           </button>
           <select
-            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1.5 text-xs border-zinc-800"
+            className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1.5 text-xs border-zinc-200 dark:border-zinc-800"
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
           >
@@ -191,7 +191,7 @@ export default function VisualizerPlayerPage() {
           </select>
           {viz.inputKind === "array" && (
             <select
-              className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1.5 text-xs border-zinc-800"
+              className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1.5 text-xs border-zinc-200 dark:border-zinc-800"
               value={size}
               onChange={(e) => setSize(Number(e.target.value))}
             >

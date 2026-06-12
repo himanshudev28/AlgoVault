@@ -41,7 +41,7 @@ export function RunPanel({ code, language }: { code: string; language: string })
     : [result?.run.stdout, result?.run.stderr].filter(Boolean).join("\n");
 
   return (
-    <div className="mt-4 border-t border-zinc-100 pt-4 border-zinc-800/60">
+    <div className="mt-4 border-t border-zinc-100 pt-4 border-zinc-200 dark:border-zinc-800/60">
       <button
         onClick={() => setOpen(!open)}
         className="text-xs font-medium text-lime-400 hover:underline"
@@ -56,7 +56,7 @@ export function RunPanel({ code, language }: { code: string; language: string })
               stdin (optional)
             </label>
             <textarea
-              className="min-h-16 w-full resize-y rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 font-mono text-xs outline-none focus:border-lime-400 border-zinc-800 dark:bg-zinc-950"
+              className="min-h-16 w-full resize-y rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-2 font-mono text-xs outline-none focus:border-lime-400 border-zinc-200 dark:border-zinc-800 dark:bg-zinc-950"
               placeholder={"5\n1 2 3 4 5"}
               value={stdin}
               onChange={(e) => setStdin(e.target.value)}
@@ -93,7 +93,7 @@ export function RunPanel({ code, language }: { code: string; language: string })
                   </span>
                 )}
               </div>
-              <pre className="max-h-64 overflow-auto rounded-xl border border-zinc-800 bg-zinc-950 p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap text-zinc-200 border-zinc-800">
+              <pre className="max-h-64 overflow-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap text-zinc-200 border-zinc-200 dark:border-zinc-800">
                 {output || "(no output)"}
               </pre>
             </div>

@@ -91,13 +91,13 @@ export default function SheetsPage() {
   };
 
   const input =
-    "rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-2 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400";
+    "rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3.5 py-2 text-sm text-zinc-900 dark:text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400";
   const card =
-    "rounded-2xl border border-zinc-800 bg-zinc-900 border-zinc-800 bg-zinc-900/40";
+    "rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40";
   const btn =
     "rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-lime-600 disabled:opacity-60";
   const btnGhost =
-    "rounded-xl border border-zinc-800 px-4 py-2 text-sm font-medium transition-colors hover:border-lime-300 border-zinc-800";
+    "rounded-xl border border-zinc-200 dark:border-zinc-800 px-4 py-2 text-sm font-medium transition-colors hover:border-lime-300 border-zinc-200 dark:border-zinc-800";
 
   if (loading) {
     return (
@@ -136,7 +136,7 @@ export default function SheetsPage() {
         <div className={`${card} overflow-x-auto`}>
           <table className="w-full min-w-175 text-sm">
             <thead>
-              <tr className="border-b border-zinc-800 text-left text-xs text-zinc-500 border-zinc-800">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-left text-xs text-zinc-500 border-zinc-200 dark:border-zinc-800">
                 <th className="px-3 py-2 font-medium">Title *</th>
                 <th className="px-3 py-2 font-medium">Link</th>
                 <th className="px-3 py-2 font-medium">Topic</th>
@@ -156,7 +156,7 @@ export default function SheetsPage() {
                 return (
                   <tr
                     key={i}
-                    className="border-b border-zinc-800 last:border-0 border-zinc-800/60"
+                    className="border-b border-zinc-200 dark:border-zinc-800 last:border-0 border-zinc-200 dark:border-zinc-800/60"
                   >
                     <td className="px-2 py-1">
                       <input className={cell} value={d.title} onChange={(e) => set({ title: e.target.value })} />
@@ -169,7 +169,7 @@ export default function SheetsPage() {
                     </td>
                     <td className="px-2 py-1">
                       <select
-                        className="rounded-md border border-zinc-800 bg-transparent px-1.5 py-1 text-xs border-zinc-800"
+                        className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-transparent px-1.5 py-1 text-xs border-zinc-200 dark:border-zinc-800"
                         value={d.tag}
                         onChange={(e) => set({ tag: e.target.value })}
                       >
@@ -358,7 +358,7 @@ export default function SheetsPage() {
                     </span>
                     <span>{pct}%</span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 bg-zinc-100 dark:bg-zinc-800">
                     <div
                       className="h-full rounded-full bg-lime-400 transition-all"
                       style={{ width: `${pct}%` }}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { ProfileButton } from "@/components/ProfileButton";
 
 const Icons = {
@@ -61,12 +62,12 @@ const NAV = [
 const Logo = () => (
   <Link href="/" className="mb-8 flex items-center gap-2.5 px-2 group">
     <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10 transition-colors group-hover:bg-lime-400/20">
-      <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
+      <svg className="size-3.5 text-lime-500 dark:text-lime-400" viewBox="0 0 24 24" fill="currentColor">
         <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
       </svg>
     </div>
-    <span className="text-[15px] font-semibold tracking-tight text-zinc-100">
-      Algo<span className="text-lime-400">Vault</span>
+    <span className="text-[15px] font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+      Algo<span className="text-lime-500 dark:text-lime-400">Vault</span>
     </span>
   </Link>
 );
@@ -88,7 +89,6 @@ export function Sidebar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => { setOpen(false); }, [pathname]);
-
   useEffect(() => {
     if (open) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -105,13 +105,13 @@ export function Sidebar() {
           onClick={onClick}
           className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150 ${
             active
-              ? "bg-lime-400/10 text-lime-400"
-              : "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
+              ? "bg-lime-500/10 text-lime-600 dark:bg-lime-400/10 dark:text-lime-400"
+              : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
           }`}
         >
-          <span className={active ? "text-lime-400" : ""}>{item.icon}</span>
+          <span className={active ? "text-lime-600 dark:text-lime-400" : ""}>{item.icon}</span>
           {item.label}
-          {active && <span className="ml-auto size-1.5 rounded-full bg-lime-400" />}
+          {active && <span className="ml-auto size-1.5 rounded-full bg-lime-500 dark:bg-lime-400" />}
         </Link>
       );
     });
@@ -119,34 +119,32 @@ export function Sidebar() {
   return (
     <>
       {/* ── Desktop sidebar ──────────────────────────────────────────── */}
-      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-800/60 bg-zinc-950 px-3 py-5 md:flex">
+      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-200 bg-white px-3 py-5 dark:border-zinc-800/60 dark:bg-zinc-950 md:flex">
         <Logo />
         <nav className="flex flex-1 flex-col gap-0.5">{navLinks()}</nav>
-        <div className="border-t border-zinc-800/60 pt-3">
-          <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-zinc-900/60 text-[11px] text-zinc-500">
-            <span className="size-1.5 rounded-full bg-lime-400 shrink-0" />
-            Dark mode
-          </div>
+        <div className="border-t border-zinc-200 pt-4 dark:border-zinc-800/60">
+          <ThemeToggle />
         </div>
       </aside>
 
       {/* ── Mobile header ────────────────────────────────────────────── */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-800/60 bg-zinc-950/95 px-4 backdrop-blur md:hidden">
+      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-200 bg-white/95 px-4 backdrop-blur dark:border-zinc-800/60 dark:bg-zinc-950/95 md:hidden">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10">
-            <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="size-3.5 text-lime-500 dark:text-lime-400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
             </svg>
           </div>
-          <span className="font-semibold tracking-tight text-zinc-100">
-            Algo<span className="text-lime-400">Vault</span>
+          <span className="font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+            Algo<span className="text-lime-500 dark:text-lime-400">Vault</span>
           </span>
         </Link>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <ProfileButton />
           <button
             onClick={() => setOpen(!open)}
-            className="inline-flex size-9 items-center justify-center rounded-lg border border-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
+            className="inline-flex size-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800"
             aria-label={open ? "Close menu" : "Open menu"}
           >
             {open ? <CloseIcon /> : <MenuIcon />}
@@ -157,35 +155,29 @@ export function Sidebar() {
       {/* ── Mobile drawer ────────────────────────────────────────────── */}
       {open && (
         <div className="fixed inset-0 z-60 md:hidden">
-          <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-          />
-          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-zinc-800/60 bg-zinc-950 px-4 py-5">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-zinc-200 bg-white px-4 py-5 dark:border-zinc-800/60 dark:bg-zinc-950">
             <div className="mb-6 flex items-center justify-between">
               <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
                 <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10">
-                  <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="size-3.5 text-lime-500 dark:text-lime-400" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
                   </svg>
                 </div>
-                <span className="text-[15px] font-semibold tracking-tight text-zinc-100">
-                  Algo<span className="text-lime-400">Vault</span>
+                <span className="text-[15px] font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+                  Algo<span className="text-lime-500 dark:text-lime-400">Vault</span>
                 </span>
               </Link>
               <button
                 onClick={() => setOpen(false)}
-                className="inline-flex size-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
+                className="inline-flex size-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 <CloseIcon />
               </button>
             </div>
             <nav className="flex flex-col gap-0.5">{navLinks(() => setOpen(false))}</nav>
-            <div className="mt-auto border-t border-zinc-800/60 pt-3">
-              <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-zinc-900/60 text-[11px] text-zinc-500">
-                <span className="size-1.5 rounded-full bg-lime-400 shrink-0" />
-                Dark mode
-              </div>
+            <div className="mt-auto border-t border-zinc-200 pt-4 dark:border-zinc-800/60">
+              <ThemeToggle />
             </div>
           </aside>
         </div>

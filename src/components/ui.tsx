@@ -81,7 +81,7 @@ export function Ring({
           r={r}
           fill="none"
           strokeWidth={stroke}
-          className="stroke-zinc-800"
+          className="stroke-zinc-200 dark:stroke-zinc-800"
         />
         <circle
           cx={size / 2}
@@ -136,7 +136,6 @@ export function ExternalLinkIcon({ className = "size-3.5" }: { className?: strin
   );
 }
 
-// Crackr-style card: dark surface, tight border, no shadow
 export function Card({
   children,
   className = "",
@@ -146,7 +145,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-xl border border-zinc-800 bg-zinc-900/60 ${className}`}
+      className={`rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/60 ${className}`}
     >
       {children}
     </div>

@@ -89,14 +89,14 @@ export default function MockInterviewPage() {
   }, [phase]);
 
   const card =
-    "rounded-2xl border border-zinc-800 bg-zinc-900 border-zinc-800 bg-zinc-900/40";
+    "rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40";
   const btn =
     "rounded-xl bg-lime-400 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lime-600 disabled:opacity-50";
   const chip = (active: boolean) =>
     `rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
       active
         ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
-        : "border-zinc-800 text-zinc-600 hover:border-zinc-400 border-zinc-800 text-zinc-400"
+        : "border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:border-zinc-400 border-zinc-200 dark:border-zinc-800 text-zinc-400"
     }`;
 
   // ─── Setup ───
@@ -161,7 +161,7 @@ export default function MockInterviewPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 border-t border-zinc-800 pt-5 border-zinc-800/60">
+          <div className="flex items-center gap-3 border-t border-zinc-200 dark:border-zinc-800 pt-5 border-zinc-200 dark:border-zinc-800/60">
             <button className={btn} onClick={start} disabled={pool.length === 0}>
               Start interview →
             </button>
@@ -189,7 +189,7 @@ export default function MockInterviewPage() {
             className={`rounded-2xl border px-5 py-3 font-mono text-2xl font-bold tabular-nums ${
               low
                 ? "border-red-500/40 bg-red-500/10 text-red-500"
-                : "border-zinc-800"
+                : "border-zinc-200 dark:border-zinc-800"
             }`}
           >
             {fmtClock(secondsLeft)}
@@ -234,7 +234,7 @@ export default function MockInterviewPage() {
           })}
         </div>
 
-        <button className={`${btn} mt-6 bg-zinc-700 hover:bg-zinc-800`} onClick={finish}>
+        <button className={`${btn} mt-6 bg-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800`} onClick={finish}>
           End interview early
         </button>
       </div>

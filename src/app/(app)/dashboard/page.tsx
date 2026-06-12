@@ -122,7 +122,7 @@ export default async function DashboardPage() {
   }
   const heatColor = (c: number) =>
     c === 0
-      ? "bg-zinc-800/60"
+      ? "bg-zinc-100 dark:bg-zinc-800/60"
       : c === 1
         ? "bg-lime-900"
         : c <= 3
@@ -154,7 +154,7 @@ export default async function DashboardPage() {
         <a
           href="/api/export"
           download
-          className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-lime-400 hover:text-lime-400"
+          className="rounded-lg border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-lime-400 hover:text-lime-400"
         >
           ⬇ Export my data
         </a>
@@ -250,7 +250,7 @@ export default async function DashboardPage() {
                       {c.solved}/{c.total}
                     </span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                     <div
                       className={`h-full rounded-full ${TAG_DOT[t]}`}
                       style={{ width: `${p}%` }}
@@ -274,7 +274,7 @@ export default async function DashboardPage() {
                 <Link
                   key={t}
                   href={`/problems?topic=${encodeURIComponent(t)}`}
-                  className="rounded-xl border border-zinc-800 px-3 py-2.5 transition-colors hover:border-lime-400/40"
+                  className="rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2.5 transition-colors hover:border-lime-400/40"
                 >
                   <div className="mb-1 flex items-center justify-between gap-2 text-xs">
                     <span className="truncate font-medium">{t}</span>
@@ -282,7 +282,7 @@ export default async function DashboardPage() {
                       {v.solved}/{v.total}
                     </span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
                     <div
                       className={`h-full rounded-full ${
                         p >= 70 ? "bg-lime-400" : p >= 30 ? "bg-amber-500" : "bg-red-400"
@@ -309,7 +309,7 @@ export default async function DashboardPage() {
                   <li key={t}>
                     <Link
                       href={`/problems?topic=${encodeURIComponent(t)}&status=Unsolved`}
-                      className="flex items-center justify-between rounded-lg bg-zinc-800/60 px-3 py-2 text-xs font-medium transition-colors hover:bg-lime-400/10"
+                      className="flex items-center justify-between rounded-lg bg-zinc-100 dark:bg-zinc-800/60 px-3 py-2 text-xs font-medium transition-colors hover:bg-lime-400/10"
                     >
                       <span>{t}</span>
                       <span className="text-zinc-500">

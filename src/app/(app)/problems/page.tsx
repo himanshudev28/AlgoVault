@@ -102,7 +102,7 @@ function BuiltinTab() {
   }, [map]);
 
   const select =
-    "rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs font-medium text-zinc-300 outline-none transition-colors focus:border-lime-400";
+    "rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-xs font-medium text-zinc-300 outline-none transition-colors focus:border-lime-400";
 
   if (loading) {
     return (
@@ -125,7 +125,7 @@ function BuiltinTab() {
           </span>
           <span>{pct}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
+        <div className="h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
           <div
             className="h-full rounded-full bg-linear-to-r from-lime-400 to-lime-500 transition-all duration-500"
             style={{ width: `${pct}%` }}
@@ -141,7 +141,7 @@ function BuiltinTab() {
                 className={`inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px] font-medium transition-colors ${
                   level === t
                     ? "border-lime-400 bg-lime-400/10"
-                    : "border-zinc-800 hover:border-zinc-600"
+                    : "border-zinc-200 dark:border-zinc-800 hover:border-zinc-600"
                 }`}
               >
                 <span className={`size-1.5 rounded-full ${TAG_DOT[t]}`} />
@@ -153,10 +153,10 @@ function BuiltinTab() {
       </div>
 
       {/* Filter bar */}
-      <div className="sticky top-0 z-10 -mx-4 mb-4 border-y border-zinc-800 bg-zinc-950/95 px-4 py-2.5 backdrop-blur md:top-0 md:mx-0 md:rounded-xl md:border">
+      <div className="sticky top-0 z-10 -mx-4 mb-4 border-y border-zinc-200 dark:border-zinc-800 bg-zinc-950/95 px-4 py-2.5 backdrop-blur md:top-0 md:mx-0 md:rounded-xl md:border">
         <div className="flex flex-wrap items-center gap-2">
           <input
-            className="w-44 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
+            className="w-44 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
             placeholder="Search problems…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -182,7 +182,7 @@ function BuiltinTab() {
             className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               onlyBookmarked
                 ? "border-lime-400 bg-lime-400/10 text-lime-400"
-                : "border-zinc-800 text-zinc-500"
+                : "border-zinc-200 dark:border-zinc-800 text-zinc-500"
             }`}
           >
             <BookmarkIcon filled={onlyBookmarked} className="size-3.5" />
@@ -193,7 +193,7 @@ function BuiltinTab() {
             className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               onlyRevision
                 ? "border-lime-400 bg-lime-400/10 text-lime-400"
-                : "border-zinc-800 text-zinc-500"
+                : "border-zinc-200 dark:border-zinc-800 text-zinc-500"
             }`}
           >
             <RepeatIcon className="size-3.5" />
@@ -216,7 +216,7 @@ function BuiltinTab() {
           return (
             <section
               key={topicName}
-              className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-900 border-zinc-800 bg-zinc-900/40"
+              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40"
             >
               <button
                 onClick={() =>
@@ -227,7 +227,7 @@ function BuiltinTab() {
                     return next;
                   })
                 }
-                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-zinc-800/50 hover:bg-zinc-900"
+                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-900"
               >
                 <span
                   className={`text-xs text-zinc-400 transition-transform ${isCollapsed ? "" : "rotate-90"}`}
@@ -238,7 +238,7 @@ function BuiltinTab() {
                 <span className="text-xs text-zinc-500">
                   {solvedHere}/{questions.length}
                 </span>
-                <div className="ml-auto hidden h-1.5 w-28 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-800">
+                <div className="ml-auto hidden h-1.5 w-28 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-100 dark:bg-zinc-800">
                   <div
                     className="h-full rounded-full bg-lime-400 transition-all"
                     style={{ width: `${(solvedHere / questions.length) * 100}%` }}
@@ -246,7 +246,7 @@ function BuiltinTab() {
                 </div>
               </button>
               {!isCollapsed && (
-                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-800/60">
+                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-200 dark:border-zinc-800/60">
                   {questions.map((q) => {
                     const row = getRow(q.id);
                     return (
@@ -356,7 +356,7 @@ function ImportsTab() {
 
   if (questions.length === 0) {
     return (
-      <div className="rounded-2xl border border-zinc-200 bg-zinc-900 p-10 text-center border-zinc-800 bg-zinc-900/40">
+      <div className="rounded-2xl border border-zinc-200 bg-white dark:bg-zinc-900 p-10 text-center border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
         <div className="mb-2 text-3xl">📋</div>
         <p className="text-sm font-medium">No imported problems yet</p>
         <p className="mx-auto mt-1 max-w-xs text-xs text-zinc-500">
@@ -374,7 +374,7 @@ function ImportsTab() {
     <>
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <input
-          className="w-52 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
+          className="w-52 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
           placeholder="Search imported problems…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -393,7 +393,7 @@ function ImportsTab() {
           return (
             <section
               key={sheet.id}
-              className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-900 border-zinc-800 bg-zinc-900/40"
+              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40"
             >
               {/* Sheet header */}
               <div className="flex items-center gap-3 px-4 py-3">
@@ -417,7 +417,7 @@ function ImportsTab() {
                   <span className="text-xs text-zinc-500">
                     {solved}/{sheetQs.length}
                   </span>
-                  <div className="ml-auto hidden h-1.5 w-24 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-800">
+                  <div className="ml-auto hidden h-1.5 w-24 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-100 dark:bg-zinc-800">
                     <div
                       className="h-full rounded-full bg-lime-400 transition-all"
                       style={{
@@ -437,7 +437,7 @@ function ImportsTab() {
                   className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-colors ${
                     addingTo === sheet.id
                       ? "border-lime-400 bg-lime-400/10 text-lime-400"
-                      : "border-zinc-800 text-zinc-500 hover:border-lime-400"
+                      : "border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-lime-400"
                   }`}
                 >
                   + Add
@@ -446,7 +446,7 @@ function ImportsTab() {
 
               {/* Add panel inline */}
               {addingTo === sheet.id && (
-                <div className="border-t border-zinc-100 p-4 border-zinc-800/60">
+                <div className="border-t border-zinc-100 p-4 border-zinc-200 dark:border-zinc-800/60">
                   <AddQuestionPanel
                     sheetId={sheet.id}
                     existingQuestions={sheetQs}
@@ -458,7 +458,7 @@ function ImportsTab() {
 
               {/* Question rows */}
               {!isCollapsed && qs.length > 0 && (
-                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-800/60">
+                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-200 dark:border-zinc-800/60">
                   {qs.map((q) => {
                     const row = getRow(q.id);
                     return (
@@ -527,7 +527,7 @@ function ImportsTab() {
                 </ul>
               )}
               {!isCollapsed && qs.length === 0 && search && (
-                <p className="border-t border-zinc-100 py-6 text-center text-xs text-zinc-400 border-zinc-800">
+                <p className="border-t border-zinc-100 py-6 text-center text-xs text-zinc-400 border-zinc-200 dark:border-zinc-800">
                   No matches in this sheet.
                 </p>
               )}
@@ -574,7 +574,7 @@ function ProblemsInner() {
 
       {/* Global add panel */}
       {showGlobalAdd && (
-        <div className="mb-5 rounded-2xl border border-lime-400/40 bg-zinc-900/60 p-5">
+        <div className="mb-5 rounded-2xl border border-lime-400/40 bg-white dark:bg-zinc-900/60 p-5">
           {sheets.length === 0 ? (
             <p className="text-sm text-zinc-500">
               No sheets yet.{" "}
@@ -590,7 +590,7 @@ function ProblemsInner() {
                   Add to:
                 </label>
                 <select
-                  className="rounded-lg border border-zinc-300 bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400 bg-zinc-900"
+                  className="rounded-lg border border-zinc-300 bg-white dark:bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400 bg-white dark:bg-zinc-900"
                   value={effectiveSheetId ?? ""}
                   onChange={(e) => setSelectedSheetId(Number(e.target.value))}
                 >
@@ -617,12 +617,12 @@ function ProblemsInner() {
       )}
 
       {/* Tab bar */}
-      <div className="mb-5 flex gap-1 rounded-xl border border-zinc-200 bg-zinc-900 p-1 border-zinc-800 bg-zinc-900/40">
+      <div className="mb-5 flex gap-1 rounded-xl border border-zinc-200 bg-white dark:bg-zinc-900 p-1 border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40">
         <button
           onClick={() => setActiveTab("builtin")}
           className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${
             activeTab === "builtin"
-              ? "bg-zinc-900 text-zinc-100 shadow-sm bg-zinc-800 text-zinc-100"
+              ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
               : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >
@@ -632,7 +632,7 @@ function ProblemsInner() {
           onClick={() => setActiveTab("imports")}
           className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${
             activeTab === "imports"
-              ? "bg-zinc-900 text-zinc-100 shadow-sm bg-zinc-800 text-zinc-100"
+              ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
               : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >

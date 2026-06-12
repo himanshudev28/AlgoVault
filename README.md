@@ -49,12 +49,12 @@ AlgoVault is a full-stack DSA practice tracker that goes beyond a simple checkli
 - **"Explain simpler"** and **Hinglish** modes
 - All AI responses cached in Postgres by prompt hash (no duplicate API calls)
 
-### Bhaiya Sheets *(New)*
+### Bhaiya Sheets
 Popular DSA sheets from top educators — one-click import straight into your tracker:
 
 | Sheet | Author | Problems |
 |---|---|---|
-| Striver A2Z DSA | Striver (TakeUForward) | 455 |
+| Striver A2Z DSA | Striver (TakeUForward) | 355 |
 | Love Babbar 450 | Love Babbar | 450 |
 | LeadCoding by Fraz | Fraz | 250 |
 | Arsh Goyal 45-Day Plan | Arsh Goyal | 280 |
@@ -64,11 +64,22 @@ Popular DSA sheets from top educators — one-click import straight into your tr
 
 Once imported, every sheet gets the full tracker treatment — status, notes, stars, revision, AI explain, and code runner.
 
-### My Sheets (Custom Import)
-- **CSV** — upload file or paste raw text; auto-detects columns
+### My Sheets & Custom Imports
+- **Fetch from URL** — paste a LeetCode or GFG problem link to auto-fetch title, description, difficulty, and tags; saves directly to any of your sheets
+- **CSV** — upload file or paste raw text; smart column detection handles sheets with metadata rows (e.g. Apna College)
 - **PDF** — AI extracts problems from text-based PDFs (Groq)
 - **Manual** — build a sheet from scratch row by row
-- Every import goes through a review/edit screen before saving
+- **My Imports tab** in the Problems page shows all your custom questions alongside the built-in catalog
+- **Duplicate detection** — warns if you try to add a problem already in the sheet
+- **Reimport** — re-fetch source CSV for any Bhaiya Sheet to fix column-mapping issues in existing data
+- **Auto-fix names** — bulk-corrects questions where URLs were stored as titles instead of readable names
+
+### Sheet Management
+- **Inline rename** — click the sheet title to rename it in place
+- **Inline edit** — edit title, link, topic, and difficulty for any question without leaving the page
+- **Inline delete** — remove questions with a single click
+- **Question numbers** — every row shows its position in the sheet (stays correct when searching/filtering)
+- **+ Add Question** — global button to add a problem to any sheet from anywhere in the Problems page
 
 ### Mock Interview
 - Pick topics, problem count, and duration
@@ -99,8 +110,9 @@ Once imported, every sheet gets the full tracker treatment — status, notes, st
 | Database | Neon Postgres (serverless) |
 | ORM | Drizzle ORM |
 | Auth | Clerk (email/password + Google one-click) |
-| AI | Groq (llama3-8b-8192) |
+| AI | Groq (llama-3.3-70b-versatile) |
 | Code execution | Wandbox API |
+| Problem fetch | LeetCode GraphQL API + Jina Reader |
 | Spaced repetition | SM-2 algorithm |
 
 ---
@@ -161,9 +173,9 @@ src/
 ├── app/
 │   ├── (app)/               # Authenticated pages
 │   │   ├── dashboard/       # Dashboard with stats & heatmap
-│   │   ├── problems/        # Problem list + [id] detail page
+│   │   ├── problems/        # Problem list + [id] detail + My Imports tab
 │   │   ├── revision/        # SM-2 revision queue
-│   │   ├── sheets/          # My Sheets — custom imports
+│   │   ├── sheets/          # My Sheets — custom imports + sheet detail
 │   │   ├── bhaiya-sheets/   # Bhaiya Sheets — popular DSA sheets
 │   │   ├── mock/            # Mock Interview
 │   │   └── visualizers/     # Algorithm visualizers
@@ -171,10 +183,13 @@ src/
 │   │   ├── progress/        # CRUD for problem progress
 │   │   ├── revision/        # SM-2 scheduler endpoint
 │   │   ├── sheets/          # Sheet CRUD + CSV/PDF parse
+│   │   │   ├── question/    # Custom question edit & delete
+│   │   │   ├── fix-titles/  # Bulk-fix URL-as-title data in DB
+│   │   │   └── reimport/    # Re-fetch CSV and update questions in-place
 │   │   ├── bhaiya-sheets/   # Bhaiya sheet auto-import
+│   │   ├── fetch-problem/   # LeetCode/GFG problem fetcher
 │   │   ├── ai/explain/      # Staged AI hints (Groq)
 │   │   ├── run/             # Code runner (Wandbox)
-│   │   ├── fetch-problem/   # Problem statement fetcher
 │   │   └── export/          # JSON export
 │   ├── sign-in/             # Clerk sign-in
 │   └── sign-up/             # Clerk sign-up
@@ -182,13 +197,13 @@ src/
 │   ├── Sidebar.tsx          # Navigation sidebar
 │   ├── StatusButton.tsx     # Status cycle button
 │   ├── Stars.tsx            # Confidence rating stars
-│   ├── AddQuestionPanel.tsx # Add question to sheet
+│   ├── AddQuestionPanel.tsx # Add question via URL fetch or manual entry
 │   ├── RunPanel.tsx         # In-browser code runner
 │   ├── ThemeToggle.tsx      # Dark/light toggle
 │   └── ui.tsx               # Shared UI primitives
 ├── data/
 │   ├── questions.ts         # 215-problem static catalog
-│   └── bhaiyaSheets.ts      # Bhaiya sheets catalog
+│   └── bhaiyaSheets.ts      # Bhaiya sheets catalog (incl. Striver A2Z static data)
 ├── db/
 │   ├── schema.ts            # Drizzle schema
 │   └── index.ts             # DB client
@@ -196,7 +211,7 @@ src/
     ├── session.ts           # Clerk session helpers
     ├── sm2.ts               # SM-2 spaced repetition
     ├── groq.ts              # Groq AI client + cache
-    ├── csv.ts               # CSV parser
+    ├── csv.ts               # Smart CSV parser (auto-detects header row & columns)
     ├── markdown.ts          # Markdown renderer
     ├── visualizers.ts       # Visualizer frame generators
     ├── useProgress.ts       # Progress state hook
@@ -234,6 +249,6 @@ Pull requests are welcome! For major changes, please open an issue first.
 
 <div align="center">
 
-Built with by [Himanshu](https://github.com/himanshudev28)
+Built with ❤️ by [Himanshu](https://github.com/himanshudev28)
 
 </div>

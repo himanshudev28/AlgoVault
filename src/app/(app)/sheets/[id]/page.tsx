@@ -11,6 +11,7 @@ import { DifficultyBadge, Spinner, BookmarkIcon, RepeatIcon, ExternalLinkIcon } 
 import { Stars } from "@/components/Stars";
 import { StatusButton } from "@/components/StatusButton";
 import { AddQuestionPanel } from "@/components/AddQuestionPanel";
+import { BHAIYA_SHEETS } from "@/data/bhaiyaSheets";
 
 const TOPICS = [
   "Arrays", "Strings", "Hashing", "Sorting & Searching", "Two Pointers & Sliding Window",
@@ -86,6 +87,15 @@ export default function SheetDetailPage() {
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
 
+  // Bulk title fix
+  const [fixing, setFixing] = useState(false);
+  const [fixResult, setFixResult] = useState<{ fixed: number } | null>(null);
+
+  // Reimport from source CSV
+  const [reimporting, setReimporting] = useState(false);
+  const [reimportResult, setReimportResult] = useState<{ count: number; previous: number } | null>(null);
+  const [reimportError, setReimportError] = useState<string | null>(null);
+
   const sheet = sheets.find((s) => s.id === sheetId);
   const sheetQs = useMemo(
     () => questions.filter((q) => q.sheetId === sheetId),
@@ -103,6 +113,25 @@ export default function SheetDetailPage() {
     () => mine.filter((q) => getRow(q.id).status === "solved").length,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [mine, map],
+  );
+
+  const urlTitleCount = useMemo(
+    () => sheetQs.filter((q) => looksLikeUrl(q.title.trim())).length,
+    [sheetQs],
+  );
+
+  // Map question id → 1-based position in the full (unsorted) sheet
+  const positionMap = useMemo(() => {
+    const sorted = [...sheetQs].sort((a, b) => a.order - b.order);
+    const m = new Map<number, number>();
+    sorted.forEach((q, i) => m.set(q.id, i + 1));
+    return m;
+  }, [sheetQs]);
+
+  // Whether this sheet can be reimported (has a matching catalog entry with CSV URL)
+  const catalogEntry = useMemo(
+    () => sheet ? BHAIYA_SHEETS.find((b) => b.name === sheet.name && !!b.csvExportUrl) : undefined,
+    [sheet],
   );
 
   useEffect(() => {
@@ -166,6 +195,48 @@ export default function SheetDetailPage() {
     if (!confirm("Remove this question from the sheet?")) return;
     const res = await fetch(`/api/sheets/question?id=${id}`, { method: "DELETE" });
     if (res.ok) refresh();
+  };
+
+  const fixTitles = async () => {
+    setFixing(true);
+    setFixResult(null);
+    try {
+      const res = await fetch("/api/sheets/fix-titles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sheetId }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Fix failed");
+      setFixResult({ fixed: data.fixed });
+      refresh();
+    } catch {
+      // ignore — button will stay visible to retry
+    } finally {
+      setFixing(false);
+    }
+  };
+
+  const doReimport = async () => {
+    if (!confirm("This will re-fetch the sheet CSV and replace all question data. Your solve/bookmark progress is preserved where possible. Continue?")) return;
+    setReimporting(true);
+    setReimportResult(null);
+    setReimportError(null);
+    try {
+      const res = await fetch("/api/sheets/reimport", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sheetId }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Reimport failed");
+      setReimportResult({ count: data.count, previous: data.previous });
+      refresh();
+    } catch (e) {
+      setReimportError(e instanceof Error ? e.message : "Reimport failed");
+    } finally {
+      setReimporting(false);
+    }
   };
 
   if (loading || progressLoading) {
@@ -273,6 +344,77 @@ export default function SheetDetailPage() {
         </div>
       </div>
 
+      {/* Fix names banner — shown when imported data has URLs stored as titles */}
+      {urlTitleCount > 0 && !fixResult && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 dark:border-amber-700/50 dark:bg-amber-950/30">
+          <div className="flex min-w-0 items-center gap-2 text-sm text-amber-700 dark:text-amber-400">
+            <svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>
+              <strong>{urlTitleCount} question{urlTitleCount === 1 ? "" : "s"}</strong> have URLs stored as names. Auto-fix derives the readable title from the problem URL.
+            </span>
+          </div>
+          <button
+            onClick={fixTitles}
+            disabled={fixing}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600 disabled:opacity-60"
+          >
+            {fixing ? <><Spinner className="size-3" /> Fixing…</> : "Auto-fix names"}
+          </button>
+        </div>
+      )}
+      {fixResult && (
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-950/30 dark:text-emerald-400">
+          <CheckIcon className="size-4 shrink-0" />
+          Fixed {fixResult.fixed} question name{fixResult.fixed === 1 ? "" : "s"} — titles now show correctly in the database.
+          <button onClick={() => setFixResult(null)} className="ml-auto text-emerald-500 hover:text-emerald-700">
+            <XIcon className="size-4" />
+          </button>
+        </div>
+      )}
+
+      {/* Reimport banner — shown for built-in sheets with a CSV source */}
+      {catalogEntry && !reimportResult && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-800/50 dark:bg-blue-950/30">
+          <div className="flex min-w-0 items-center gap-2 text-sm text-blue-700 dark:text-blue-400">
+            <svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/>
+              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+            </svg>
+            <span>
+              Question data may have incorrect names due to a CSV column mismatch.
+              <strong className="ml-1">Reimport</strong> to fix all names from the original source.
+            </span>
+          </div>
+          <button
+            onClick={doReimport}
+            disabled={reimporting}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-blue-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-600 disabled:opacity-60"
+          >
+            {reimporting ? <><Spinner className="size-3" /> Reimporting…</> : "Reimport now"}
+          </button>
+        </div>
+      )}
+      {reimportResult && (
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-950/30 dark:text-emerald-400">
+          <CheckIcon className="size-4 shrink-0" />
+          Reimported {reimportResult.count} questions — all names are now correct.
+          <button onClick={() => setReimportResult(null)} className="ml-auto text-emerald-500 hover:text-emerald-700">
+            <XIcon className="size-4" />
+          </button>
+        </div>
+      )}
+      {reimportError && (
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-800/40 dark:bg-red-950/30">
+          {reimportError}
+          <button onClick={() => setReimportError(null)} className="ml-auto text-red-400 hover:text-red-600">
+            <XIcon className="size-4" />
+          </button>
+        </div>
+      )}
+
       {/* Add question panel */}
       {showAdd && (
         <div className="mb-4 animate-fade-up">
@@ -357,6 +499,9 @@ export default function SheetDetailPage() {
                   /* Normal row */
                   <div className="group flex items-center gap-2.5 px-4 py-2.5">
                     <StatusButton status={row.status} onChange={(s) => update(q.id, { status: s })} />
+                    <span className="w-8 shrink-0 text-right text-[11px] tabular-nums text-zinc-400 dark:text-zinc-600">
+                      {positionMap.get(q.id)}
+                    </span>
                     <Link
                       href={`/problems/${q.id}`}
                       className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-emerald-500 ${

@@ -70,37 +70,89 @@ const TAG_ALIASES: Record<string, string> = {
   basic: "easy",
 };
 
+// Keywords that identify a row as a header row when found in cell text.
+// Used to skip metadata rows at the top of sheets (e.g. Apna College has 10 junk rows before its real header).
+const HEADER_KEYWORDS = [
+  "title", "name", "problem", "question",
+  "link", "url", "source",
+  "topic", "category", "section",
+  "difficulty", "tag", "level",
+  "note", "notes", "hint", "approach", "remark",
+  "compan",
+];
+
+function scoreHeaderRow(row: string[]): number {
+  return row.filter((cell) => {
+    const c = cell.trim().toLowerCase();
+    return c.length > 0 && HEADER_KEYWORDS.some((kw) => c.includes(kw));
+  }).length;
+}
+
+// Find the index of the most likely header row within the first 30 rows.
+// Returns 0 (no recognizable header found) when no row scores ≥ 2.
+function findHeaderRowIndex(rows: string[][]): number {
+  let bestIdx = -1;
+  let bestScore = 1; // must beat 1 to be considered a real header
+  const limit = Math.min(rows.length, 30);
+  for (let i = 0; i < limit; i++) {
+    const s = scoreHeaderRow(rows[i]);
+    if (s > bestScore) {
+      bestScore = s;
+      bestIdx = i;
+    }
+  }
+  return bestIdx; // -1 means no header found
+}
+
 // Expected columns: title, link, topic, difficulty/tag, note — header row
 // optional, order flexible when a header exists.
+// Handles sheets with metadata rows before the real header (e.g. Apna College).
 export function csvToQuestions(text: string): DraftQuestion[] {
   const rows = parseCsvRows(text);
   if (rows.length === 0) return [];
 
-  const header = rows[0].map((h) => h.trim().toLowerCase());
-  const findCol = (...names: string[]) => header.findIndex((h) => names.includes(h));
-  const titleCol = findCol("title", "name", "problem", "question");
-  const hasHeader = titleCol !== -1;
+  const headerRowIdx = findHeaderRowIndex(rows);
+  const hasHeader = headerRowIdx >= 0;
 
-  const cols = hasHeader
-    ? {
-        title: titleCol,
-        link: findCol("link", "url", "source"),
-        topic: findCol("topic", "category", "section"),
-        tag: findCol("difficulty", "tag", "level"),
-        note: findCol("note", "notes", "hint", "approach"),
-      }
-    : { title: 0, link: 1, topic: 2, tag: 3, note: 4 };
+  // Build column index map using substring matching (handles "Question (375)" → "question")
+  const header = hasHeader ? rows[headerRowIdx].map((h) => h.trim().toLowerCase()) : [];
+  const findCol = (...names: string[]): number => {
+    if (!hasHeader) return -1;
+    // Exact match first for precision
+    const exact = header.findIndex((h) => names.includes(h));
+    if (exact >= 0) return exact;
+    // Substring match: header cell contains keyword
+    return header.findIndex((h) => names.some((n) => h.includes(n)));
+  };
 
-  const dataRows = hasHeader ? rows.slice(1) : rows;
+  let titleCol: number;
+  let linkCol: number;
+  let topicCol: number;
+  let tagCol: number;
+  let noteCol: number;
+
+  if (hasHeader) {
+    titleCol = findCol("title", "name", "problem", "question");
+    linkCol  = findCol("link", "url", "source");
+    topicCol = findCol("topic", "category", "section");
+    tagCol   = findCol("difficulty", "tag", "level");
+    noteCol  = findCol("note", "notes", "hint", "approach", "remark", "remarks");
+    // If header row found but no title column matched, fall back to first non-topic column
+    if (titleCol < 0) titleCol = topicCol >= 0 && topicCol === 0 ? 1 : 0;
+  } else {
+    titleCol = 0; linkCol = 1; topicCol = 2; tagCol = 3; noteCol = 4;
+  }
+
+  const dataRows = hasHeader ? rows.slice(headerRowIdx + 1) : rows;
   const get = (row: string[], idx: number) => (idx >= 0 && row[idx] ? row[idx].trim() : "");
 
   return dataRows
     .map((row) => ({
-      title: cleanTitle(get(row, cols.title)),
-      link: get(row, cols.link),
-      topic: get(row, cols.topic) || "Custom",
-      tag: TAG_ALIASES[get(row, cols.tag).toLowerCase()] ?? "medium",
-      note: get(row, cols.note),
+      title: cleanTitle(get(row, titleCol)),
+      link: get(row, linkCol),
+      topic: get(row, topicCol) || "Custom",
+      tag: TAG_ALIASES[get(row, tagCol).toLowerCase()] ?? "medium",
+      note: get(row, noteCol),
     }))
     .filter((q) => q.title.length > 0);
 }

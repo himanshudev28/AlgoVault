@@ -250,7 +250,7 @@ export default function SheetDetailPage() {
     return (
       <div className="p-8 text-sm text-zinc-500">
         Sheet not found.{" "}
-        <Link href="/sheets" className="text-emerald-500 hover:underline">
+        <Link href="/sheets" className="text-lime-400 hover:underline">
           Back to sheets
         </Link>
       </div>
@@ -260,13 +260,13 @@ export default function SheetDetailPage() {
   const pct = mine.length ? Math.round((solved / mine.length) * 100) : 0;
 
   const inputCls =
-    "rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950";
+    "rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400";
 
   return (
     <div className="mx-auto max-w-4xl">
       <Link
         href="/sheets"
-        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-emerald-500"
+        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-lime-400"
       >
         ← My sheets
       </Link>
@@ -279,7 +279,7 @@ export default function SheetDetailPage() {
               <div className="flex items-center gap-2">
                 <input
                   ref={renameRef}
-                  className="rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-xl font-bold outline-none transition-colors focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+                  className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xl font-bold outline-none transition-colors focus:border-lime-400"
                   value={sheetName}
                   onChange={(e) => setSheetName(e.target.value)}
                   onKeyDown={(e) => {
@@ -289,14 +289,14 @@ export default function SheetDetailPage() {
                 />
                 <button
                   onClick={saveRename}
-                  className="inline-flex size-8 items-center justify-center rounded-lg bg-emerald-500 text-white hover:bg-emerald-600"
+                  className="inline-flex size-8 items-center justify-center rounded-lg bg-lime-400 text-white hover:bg-lime-600"
                   title="Save name"
                 >
                   <CheckIcon className="size-4" />
                 </button>
                 <button
                   onClick={() => setRenamingSheet(false)}
-                  className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-300 text-zinc-500 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+                  className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-800 text-zinc-500 hover:bg-zinc-800 hover:bg-zinc-800"
                   title="Cancel"
                 >
                   <XIcon className="size-4" />
@@ -320,8 +320,8 @@ export default function SheetDetailPage() {
             onClick={() => setShowAdd(!showAdd)}
             className={`inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
               showAdd
-                ? "bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/40 dark:text-emerald-400"
-                : "bg-emerald-500 text-white hover:bg-emerald-600"
+                ? "bg-lime-400/10 text-lime-600 ring-1 ring-lime-400/40 dark:text-lime-300"
+                : "bg-lime-400 text-white hover:bg-lime-600"
             }`}
           >
             {showAdd ? "✕ Cancel" : "+ Add Question"}
@@ -335,9 +335,9 @@ export default function SheetDetailPage() {
             </span>
             <span>{pct}%</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+          <div className="h-2 overflow-hidden rounded-full bg-zinc-200 bg-zinc-800">
             <div
-              className="h-full rounded-full bg-linear-to-r from-emerald-500 to-teal-400 transition-all duration-500"
+              className="h-full rounded-full bg-linear-to-r from-lime-400 to-lime-500 transition-all duration-500"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -366,10 +366,10 @@ export default function SheetDetailPage() {
         </div>
       )}
       {fixResult && (
-        <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-950/30 dark:text-emerald-400">
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-lime-200 bg-emerald-50 px-4 py-3 text-sm text-lime-700 dark:border-lime-700/40 dark:bg-emerald-950/30 dark:text-lime-300">
           <CheckIcon className="size-4 shrink-0" />
           Fixed {fixResult.fixed} question name{fixResult.fixed === 1 ? "" : "s"} — titles now show correctly in the database.
-          <button onClick={() => setFixResult(null)} className="ml-auto text-emerald-500 hover:text-emerald-700">
+          <button onClick={() => setFixResult(null)} className="ml-auto text-lime-400 hover:text-lime-700">
             <XIcon className="size-4" />
           </button>
         </div>
@@ -398,10 +398,10 @@ export default function SheetDetailPage() {
         </div>
       )}
       {reimportResult && (
-        <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-950/30 dark:text-emerald-400">
+        <div className="mb-4 flex items-center gap-2 rounded-xl border border-lime-200 bg-emerald-50 px-4 py-3 text-sm text-lime-700 dark:border-lime-700/40 dark:bg-emerald-950/30 dark:text-lime-300">
           <CheckIcon className="size-4 shrink-0" />
           Reimported {reimportResult.count} questions — all names are now correct.
-          <button onClick={() => setReimportResult(null)} className="ml-auto text-emerald-500 hover:text-emerald-700">
+          <button onClick={() => setReimportResult(null)} className="ml-auto text-lime-400 hover:text-lime-700">
             <XIcon className="size-4" />
           </button>
         </div>
@@ -429,15 +429,15 @@ export default function SheetDetailPage() {
 
       {/* Search */}
       <input
-        className="mb-4 w-56 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900"
+        className="mb-4 w-56 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 bg-zinc-900"
         placeholder="Search this sheet…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       {/* Question list */}
-      <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/40">
-        <ul className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+      <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 border-zinc-800 bg-zinc-900/40">
+        <ul className="divide-y divide-zinc-800/60">
           {mine.map((q) => {
             const row = getRow(q.id);
             const isEditing = editingId === q.id;
@@ -482,14 +482,14 @@ export default function SheetDetailPage() {
                       <button
                         onClick={saveEdit}
                         disabled={editSaving || !editForm.title.trim()}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-600 disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-lime-400 px-3 py-1.5 text-xs font-semibold text-white hover:bg-lime-600 disabled:opacity-50"
                       >
                         {editSaving ? <Spinner className="size-3" /> : <CheckIcon className="size-3" />}
                         Save
                       </button>
                       <button
                         onClick={cancelEdit}
-                        className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-500 hover:border-zinc-400 dark:border-zinc-700"
+                        className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 hover:border-zinc-400"
                       >
                         Cancel
                       </button>
@@ -499,13 +499,13 @@ export default function SheetDetailPage() {
                   /* Normal row */
                   <div className="group flex items-center gap-2.5 px-4 py-2.5">
                     <StatusButton status={row.status} onChange={(s) => update(q.id, { status: s })} />
-                    <span className="w-8 shrink-0 text-right text-[11px] tabular-nums text-zinc-400 dark:text-zinc-600">
+                    <span className="w-8 shrink-0 text-right text-[11px] tabular-nums text-zinc-400">
                       {positionMap.get(q.id)}
                     </span>
                     <Link
                       href={`/problems/${q.id}`}
-                      className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-emerald-500 ${
-                        row.status === "solved" ? "text-zinc-400 dark:text-zinc-500" : ""
+                      className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-lime-400 ${
+                        row.status === "solved" ? "text-zinc-400" : ""
                       }`}
                     >
                       {displayTitle(q)}
@@ -525,7 +525,7 @@ export default function SheetDetailPage() {
                       className={`transition-all hover:scale-110 ${
                         row.bookmark
                           ? "text-amber-500"
-                          : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                          : "text-zinc-300 hover:text-zinc-500"
                       }`}
                     >
                       <BookmarkIcon filled={row.bookmark} className="size-4" />
@@ -535,8 +535,8 @@ export default function SheetDetailPage() {
                       onClick={() => update(q.id, { needsRevision: !row.needsRevision })}
                       className={`transition-all hover:scale-110 ${
                         row.needsRevision
-                          ? "text-emerald-500"
-                          : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                          ? "text-lime-400"
+                          : "text-zinc-300 hover:text-zinc-500"
                       }`}
                     >
                       <RepeatIcon className="size-4" />
@@ -547,7 +547,7 @@ export default function SheetDetailPage() {
                         target="_blank"
                         rel="noreferrer"
                         title="Open original"
-                        className="text-zinc-400 transition-colors hover:text-emerald-500"
+                        className="text-zinc-400 transition-colors hover:text-lime-400"
                       >
                         <ExternalLinkIcon className="size-3.5" />
                       </a>
@@ -555,14 +555,14 @@ export default function SheetDetailPage() {
                     <button
                       onClick={() => startEdit(q)}
                       title="Edit question"
-                      className="text-zinc-300 transition-colors hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400"
+                      className="text-zinc-300 transition-colors hover:text-zinc-600"
                     >
                       <PencilIcon className="size-3.5" />
                     </button>
                     <button
                       onClick={() => deleteQuestion(q.id)}
                       title="Remove question"
-                      className="text-zinc-300 transition-colors hover:text-red-500 dark:text-zinc-600 dark:hover:text-red-400"
+                      className="text-zinc-300 transition-colors hover:text-red-500"
                     >
                       <TrashIcon className="size-3.5" />
                     </button>

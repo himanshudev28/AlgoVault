@@ -41,7 +41,7 @@ export default function RootLayout({
         <ClerkProvider
           appearance={{
             theme: dark,
-            variables: { colorPrimary: "#10b981" },
+            variables: { colorPrimary: "#a3e635" },
           }}
         >
           <script dangerouslySetInnerHTML={{ __html: themeInit }} />

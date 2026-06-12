@@ -122,12 +122,12 @@ export default async function DashboardPage() {
   }
   const heatColor = (c: number) =>
     c === 0
-      ? "bg-zinc-200/70 dark:bg-zinc-800/70"
+      ? "bg-zinc-800/60"
       : c === 1
-        ? "bg-emerald-300 dark:bg-emerald-900"
+        ? "bg-lime-900"
         : c <= 3
-          ? "bg-emerald-400 dark:bg-emerald-700"
-          : "bg-emerald-500";
+          ? "bg-lime-700"
+          : "bg-lime-400";
 
   const weakest = [...byTopic.entries()]
     .filter(([, v]) => v.total > 0)
@@ -154,7 +154,7 @@ export default async function DashboardPage() {
         <a
           href="/api/export"
           download
-          className="rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-emerald-400 hover:text-emerald-500 dark:border-zinc-700"
+          className="rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-500 transition-colors hover:border-lime-400 hover:text-lime-400"
         >
           ⬇ Export my data
         </a>
@@ -250,7 +250,7 @@ export default async function DashboardPage() {
                       {c.solved}/{c.total}
                     </span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
                     <div
                       className={`h-full rounded-full ${TAG_DOT[t]}`}
                       style={{ width: `${p}%` }}
@@ -274,7 +274,7 @@ export default async function DashboardPage() {
                 <Link
                   key={t}
                   href={`/problems?topic=${encodeURIComponent(t)}`}
-                  className="rounded-xl border border-zinc-200 px-3 py-2.5 transition-colors hover:border-emerald-400 dark:border-zinc-800"
+                  className="rounded-xl border border-zinc-800 px-3 py-2.5 transition-colors hover:border-lime-400/40"
                 >
                   <div className="mb-1 flex items-center justify-between gap-2 text-xs">
                     <span className="truncate font-medium">{t}</span>
@@ -282,10 +282,10 @@ export default async function DashboardPage() {
                       {v.solved}/{v.total}
                     </span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
                     <div
                       className={`h-full rounded-full ${
-                        p >= 70 ? "bg-emerald-500" : p >= 30 ? "bg-amber-500" : "bg-red-400"
+                        p >= 70 ? "bg-lime-400" : p >= 30 ? "bg-amber-500" : "bg-red-400"
                       }`}
                       style={{ width: `${Math.max(p, 2)}%` }}
                     />
@@ -309,7 +309,7 @@ export default async function DashboardPage() {
                   <li key={t}>
                     <Link
                       href={`/problems?topic=${encodeURIComponent(t)}&status=Unsolved`}
-                      className="flex items-center justify-between rounded-lg bg-zinc-100 px-3 py-2 text-xs font-medium transition-colors hover:bg-emerald-500/10 dark:bg-zinc-900"
+                      className="flex items-center justify-between rounded-lg bg-zinc-800/60 px-3 py-2 text-xs font-medium transition-colors hover:bg-lime-400/10"
                     >
                       <span>{t}</span>
                       <span className="text-zinc-500">
@@ -338,7 +338,7 @@ export default async function DashboardPage() {
                       <span>{icon}</span>
                       <Link
                         href={`/problems/${q.id}`}
-                        className="min-w-0 flex-1 truncate font-medium hover:text-emerald-500"
+                        className="min-w-0 flex-1 truncate font-medium hover:text-lime-400"
                       >
                         {q.title}
                       </Link>

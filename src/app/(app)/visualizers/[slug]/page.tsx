@@ -8,20 +8,20 @@ import { visualizerBySlug, type Frame, type Role } from "@/lib/visualizers";
 const ROLE_COLORS: Record<Role, string> = {
   compare: "bg-amber-400",
   swap: "bg-red-400",
-  sorted: "bg-emerald-500",
+  sorted: "bg-lime-400",
   pivot: "bg-violet-400",
-  window: "bg-teal-400",
-  best: "bg-emerald-500",
+  window: "bg-lime-400",
+  best: "bg-lime-400",
 };
 
 const GRID_COLORS: Record<number, string> = {
-  0: "bg-zinc-200 dark:bg-zinc-800",
-  1: "bg-zinc-500 dark:bg-zinc-600",
-  2: "bg-teal-400/70",
+  0: "bg-zinc-200 bg-zinc-800",
+  1: "bg-zinc-9000 dark:bg-zinc-600",
+  2: "bg-lime-400/70",
   3: "bg-amber-300",
   4: "bg-violet-400",
-  5: "bg-emerald-500",
-  6: "bg-emerald-400",
+  5: "bg-lime-400",
+  6: "bg-lime-300",
 };
 
 const SPEEDS = [
@@ -76,7 +76,7 @@ export default function VisualizerPlayerPage() {
     return (
       <div className="p-8 text-sm text-zinc-500">
         Visualizer not found.{" "}
-        <Link href="/visualizers" className="text-emerald-500 hover:underline">
+        <Link href="/visualizers" className="text-lime-400 hover:underline">
           All visualizers
         </Link>
       </div>
@@ -87,13 +87,13 @@ export default function VisualizerPlayerPage() {
   const maxVal = frame?.kind === "array" ? Math.max(...frame.arr.map(Math.abs), 1) : 1;
 
   const ctl =
-    "rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-medium transition-colors hover:border-emerald-400 disabled:opacity-40 dark:border-zinc-700";
+    "rounded-lg border border-zinc-800 px-3 py-1.5 text-xs font-medium transition-colors hover:border-lime-300 disabled:opacity-40 border-zinc-800";
 
   return (
     <div className="mx-auto max-w-4xl">
       <Link
         href="/visualizers"
-        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-emerald-500"
+        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-lime-400"
       >
         ← All visualizers
       </Link>
@@ -106,7 +106,7 @@ export default function VisualizerPlayerPage() {
       </div>
 
       {/* Stage */}
-      <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900/40">
+      <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5 border-zinc-800 bg-zinc-900/40">
         {frame?.kind === "array" && (
           <div className="flex h-56 items-end justify-center gap-1">
             {frame.arr.map((v, i) => {
@@ -160,7 +160,7 @@ export default function VisualizerPlayerPage() {
             ◀ Step
           </button>
           <button
-            className="rounded-lg bg-emerald-500 px-5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-emerald-600"
+            className="rounded-lg bg-lime-400 px-5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-lime-600"
             onClick={() => {
               if (idx >= frames.length - 1) setIdx(0);
               setPlaying(!playing);
@@ -179,7 +179,7 @@ export default function VisualizerPlayerPage() {
             🎲 Randomize
           </button>
           <select
-            className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-xs dark:border-zinc-700 dark:bg-zinc-950"
+            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1.5 text-xs border-zinc-800"
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
           >
@@ -191,7 +191,7 @@ export default function VisualizerPlayerPage() {
           </select>
           {viz.inputKind === "array" && (
             <select
-              className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-xs dark:border-zinc-700 dark:bg-zinc-950"
+              className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1.5 text-xs border-zinc-800"
               value={size}
               onChange={(e) => setSize(Number(e.target.value))}
             >
@@ -215,7 +215,7 @@ export default function VisualizerPlayerPage() {
               setPlaying(false);
               setIdx(Number(e.target.value));
             }}
-            className="w-full accent-emerald-500"
+            className="w-full accent-lime-400"
           />
           <span className="shrink-0 text-[11px] tabular-nums text-zinc-500">
             {idx + 1}/{frames.length}
@@ -230,15 +230,15 @@ export default function VisualizerPlayerPage() {
             <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-amber-400" /> comparing</span>
             <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-red-400" /> writing/swap</span>
             <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-violet-400" /> pivot/key</span>
-            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-teal-400" /> active range</span>
-            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-emerald-500" /> done/best</span>
+            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-lime-400" /> active range</span>
+            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-lime-400" /> done/best</span>
           </>
         ) : (
           <>
-            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-zinc-500" /> wall</span>
+            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-zinc-9000" /> wall</span>
             <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-amber-300" /> frontier</span>
-            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-teal-400/70" /> visited</span>
-            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-emerald-500" /> start/end/path</span>
+            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-lime-400/70" /> visited</span>
+            <span className="flex items-center gap-1"><span className="size-2.5 rounded-sm bg-lime-400" /> start/end/path</span>
           </>
         )}
       </div>

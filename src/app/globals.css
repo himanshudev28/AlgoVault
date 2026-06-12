@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #fafafa;
-  --foreground: #18181b;
+  --background: #09090b;
+  --foreground: #f4f4f5;
 }
 
 .dark {
@@ -164,14 +164,14 @@ body {
 /* ── Hero grid pattern ───────────────────────── */
 .hero-grid {
   background-image:
-    linear-gradient(rgba(16,185,129,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16,185,129,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(163,230,53,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163,230,53,0.04) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
 /* ── Gradient text ───────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #34d399 0%, #2dd4bf 100%);
+  background: linear-gradient(135deg, #a3e635 0%, #84cc16 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -179,8 +179,14 @@ body {
 
 /* ── Glow effects ────────────────────────────── */
 .glow-emerald {
-  box-shadow: 0 0 40px -10px rgba(16,185,129,0.4);
+  box-shadow: 0 0 40px -10px rgba(163,230,53,0.35);
 }
 .glow-emerald-sm {
-  box-shadow: 0 0 20px -8px rgba(16,185,129,0.3);
+  box-shadow: 0 0 20px -8px rgba(163,230,53,0.25);
+}
+.glow-lime {
+  box-shadow: 0 0 40px -10px rgba(163,230,53,0.35);
+}
+.glow-lime-sm {
+  box-shadow: 0 0 20px -8px rgba(163,230,53,0.25);
 }

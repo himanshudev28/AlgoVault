@@ -6,12 +6,11 @@ import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ProfileButton } from "@/components/ProfileButton";
 
-// Clean SVG icons — no emoji
 const Icons = {
   dashboard: (
     <svg className="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
-      <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
     </svg>
   ),
   problems: (
@@ -51,14 +50,27 @@ const Icons = {
 };
 
 const NAV = [
-  { href: "/dashboard",      label: "Dashboard",      icon: Icons.dashboard },
-  { href: "/problems",       label: "Problems",        icon: Icons.problems },
-  { href: "/revision",       label: "Revision",        icon: Icons.revision },
-  { href: "/sheets",         label: "My Sheets",       icon: Icons.sheets },
-  { href: "/bhaiya-sheets",  label: "Bhaiya Sheets",   icon: Icons.bhaiya },
-  { href: "/mock",           label: "Mock Interview",  icon: Icons.mock },
-  { href: "/visualizers",    label: "Visualizers",     icon: Icons.visualizers },
+  { href: "/dashboard",     label: "Dashboard",     icon: Icons.dashboard },
+  { href: "/problems",      label: "Problems",      icon: Icons.problems },
+  { href: "/revision",      label: "Revision",      icon: Icons.revision },
+  { href: "/sheets",        label: "My Sheets",     icon: Icons.sheets },
+  { href: "/bhaiya-sheets", label: "Bhaiya Sheets", icon: Icons.bhaiya },
+  { href: "/mock",          label: "Mock Interview",icon: Icons.mock },
+  { href: "/visualizers",   label: "Visualizers",   icon: Icons.visualizers },
 ];
+
+const Logo = () => (
+  <Link href="/" className="mb-8 flex items-center gap-2.5 px-2 group">
+    <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10 transition-colors group-hover:bg-lime-400/20">
+      <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
+      </svg>
+    </div>
+    <span className="text-[15px] font-semibold tracking-tight text-zinc-100">
+      Algo<span className="text-lime-400">Vault</span>
+    </span>
+  </Link>
+);
 
 const CloseIcon = () => (
   <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +79,7 @@ const CloseIcon = () => (
 );
 
 const MenuIcon = () => (
-  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 6h18M3 12h18M3 18h18"/>
   </svg>
 );
@@ -76,10 +88,8 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // Auto-close drawer on navigation
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  // Lock body scroll when drawer is open on mobile
   useEffect(() => {
     if (open) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -94,50 +104,40 @@ export function Sidebar() {
           key={item.href}
           href={item.href}
           onClick={onClick}
-          className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150 ${
             active
-              ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-              : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800/70"
+              ? "bg-lime-400/10 text-lime-400"
+              : "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100"
           }`}
         >
-          {item.icon}
+          <span className={active ? "text-lime-400" : ""}>{item.icon}</span>
           {item.label}
+          {active && <span className="ml-auto size-1.5 rounded-full bg-lime-400" />}
         </Link>
       );
     });
 
   return (
     <>
-      {/* ── Desktop sidebar: in-flow flex column ──────────────────── */}
-      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800/70 dark:bg-zinc-950/90 md:flex">
-        <Link href="/" className="mb-6 flex items-center gap-2.5 px-1 group">
-          <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600 shadow-sm shadow-emerald-500/20 group-hover:shadow-emerald-500/30 transition-shadow">
-            <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
-            </svg>
-          </div>
-          <span className="text-[15px] font-bold tracking-tight">
-            Algo<span className="text-emerald-500">Vault</span>
-          </span>
-        </Link>
-        <nav className="flex flex-col gap-0.5">{navLinks()}</nav>
-        <div className="mt-auto border-t border-zinc-100 pt-4 dark:border-zinc-800/60">
-          <div className="px-1">
-            <ThemeToggle />
-          </div>
+      {/* ── Desktop sidebar ──────────────────────────────────────────── */}
+      <aside className="hidden h-full w-60 shrink-0 flex-col border-r border-zinc-800/60 bg-zinc-950 px-3 py-5 md:flex">
+        <Logo />
+        <nav className="flex flex-1 flex-col gap-0.5">{navLinks()}</nav>
+        <div className="border-t border-zinc-800/60 pt-4">
+          <ThemeToggle />
         </div>
       </aside>
 
-      {/* ── Mobile: fixed top header ───────────────────────────────── */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-200 bg-white/90 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90 md:hidden">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600">
-            <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+      {/* ── Mobile header ────────────────────────────────────────────── */}
+      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-zinc-800/60 bg-zinc-950/95 px-4 backdrop-blur md:hidden">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10">
+            <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
             </svg>
           </div>
-          <span className="font-bold tracking-tight">
-            Algo<span className="text-emerald-500">Vault</span>
+          <span className="font-semibold tracking-tight text-zinc-100">
+            Algo<span className="text-lime-400">Vault</span>
           </span>
         </Link>
         <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export function Sidebar() {
           <ProfileButton />
           <button
             onClick={() => setOpen(!open)}
-            className="inline-flex size-9 items-center justify-center rounded-xl border border-zinc-200 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+            className="inline-flex size-9 items-center justify-center rounded-lg border border-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
             aria-label={open ? "Close menu" : "Open menu"}
           >
             {open ? <CloseIcon /> : <MenuIcon />}
@@ -153,40 +153,34 @@ export function Sidebar() {
         </div>
       </header>
 
-      {/* ── Mobile: full-screen drawer with backdrop ───────────────── */}
+      {/* ── Mobile drawer ────────────────────────────────────────────── */}
       {open && (
         <div className="fixed inset-0 z-60 md:hidden">
-          {/* Backdrop — click to close */}
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
-          {/* Drawer slides from left */}
-          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+          <aside className="absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col border-r border-zinc-800/60 bg-zinc-950 px-4 py-5">
             <div className="mb-6 flex items-center justify-between">
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2"
-              >
-                <div className="flex size-7 items-center justify-center rounded-lg bg-linear-to-br from-emerald-500 to-teal-600">
-                  <svg className="size-3.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
+                <div className="flex size-7 items-center justify-center rounded-lg border border-lime-400/20 bg-lime-400/10">
+                  <svg className="size-3.5 text-lime-400" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M13 2L4.5 13.5H11L9 22l10.5-13H13.5L15 2z"/>
                   </svg>
                 </div>
-                <span className="text-[15px] font-bold tracking-tight">
-                  Algo<span className="text-emerald-500">Vault</span>
+                <span className="text-[15px] font-semibold tracking-tight text-zinc-100">
+                  Algo<span className="text-lime-400">Vault</span>
                 </span>
               </Link>
               <button
                 onClick={() => setOpen(false)}
-                className="inline-flex size-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+                className="inline-flex size-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
               >
                 <CloseIcon />
               </button>
             </div>
             <nav className="flex flex-col gap-0.5">{navLinks(() => setOpen(false))}</nav>
-            <div className="mt-auto border-t border-zinc-100 pt-4 dark:border-zinc-800">
+            <div className="mt-auto border-t border-zinc-800/60 pt-4">
               <ThemeToggle />
             </div>
           </aside>

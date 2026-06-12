@@ -144,7 +144,7 @@ export default function ProblemDetailPage() {
     return (
       <div className="p-8 text-sm text-zinc-500">
         Problem not found.{" "}
-        <Link href="/problems" className="text-emerald-500 hover:underline">
+        <Link href="/problems" className="text-lime-400 hover:underline">
           Back to problems
         </Link>
       </div>
@@ -152,15 +152,15 @@ export default function ProblemDetailPage() {
   }
 
   const card =
-    "rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900/40";
+    "rounded-2xl border border-zinc-800 bg-zinc-900 p-5 border-zinc-800 bg-zinc-900/40";
   const textarea =
-    "w-full resize-y rounded-xl border border-zinc-300 bg-white px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950";
+    "w-full resize-y rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 border-zinc-800";
 
   return (
     <div className="mx-auto max-w-4xl">
       <Link
         href="/problems"
-        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-emerald-500"
+        className="mb-4 inline-block text-xs font-medium text-zinc-500 transition-colors hover:text-lime-400"
       >
         ← All problems
       </Link>
@@ -178,7 +178,7 @@ export default function ProblemDetailPage() {
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <DifficultyBadge tag={question.tag} />
               <PlatformBadge platform={question.platform} />
-              <span className="rounded-md border border-zinc-200 px-1.5 py-0.5 text-[11px] font-medium text-zinc-500 dark:border-zinc-800">
+              <span className="rounded-md border border-zinc-800 px-1.5 py-0.5 text-[11px] font-medium text-zinc-500 border-zinc-800">
                 {question.topic}
               </span>
               {question.link && (
@@ -186,7 +186,7 @@ export default function ProblemDetailPage() {
                   href={question.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-medium text-emerald-500 hover:underline"
+                  className="text-xs font-medium text-lime-400 hover:underline"
                 >
                   Solve on {question.platform} ↗
                 </a>
@@ -201,7 +201,7 @@ export default function ProblemDetailPage() {
           </span>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800/60">
+        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-zinc-800 pt-4 text-sm border-zinc-800/60">
           <label className="flex items-center gap-2 text-xs text-zinc-500">
             Confidence
             <Stars value={row.confidence} onChange={(v) => save({ confidence: v })} />
@@ -211,16 +211,16 @@ export default function ProblemDetailPage() {
             <span className="inline-flex items-center gap-1.5">
               <button
                 onClick={() => save({ attempts: Math.max(0, row.attempts - 1) })}
-                className="size-6 rounded-md border border-zinc-300 text-zinc-500 hover:border-emerald-400 dark:border-zinc-700"
+                className="size-6 rounded-md border border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-800"
               >
                 −
               </button>
-              <span className="w-6 text-center font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
+              <span className="w-6 text-center font-semibold tabular-nums text-zinc-100">
                 {row.attempts}
               </span>
               <button
                 onClick={() => save({ attempts: row.attempts + 1 })}
-                className="size-6 rounded-md border border-zinc-300 text-zinc-500 hover:border-emerald-400 dark:border-zinc-700"
+                className="size-6 rounded-md border border-zinc-800 text-zinc-500 hover:border-lime-300 border-zinc-800"
               >
                 +
               </button>
@@ -230,8 +230,8 @@ export default function ProblemDetailPage() {
             onClick={() => save({ bookmark: !row.bookmark })}
             className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               row.bookmark
-                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                : "border-zinc-300 text-zinc-500 dark:border-zinc-700"
+                ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
+                : "border-zinc-800 text-zinc-500 border-zinc-800"
             }`}
           >
             🔖 {row.bookmark ? "Bookmarked" : "Bookmark"}
@@ -240,8 +240,8 @@ export default function ProblemDetailPage() {
             onClick={() => save({ needsRevision: !row.needsRevision })}
             className={`rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               row.needsRevision
-                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                : "border-zinc-300 text-zinc-500 dark:border-zinc-700"
+                ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
+                : "border-zinc-800 text-zinc-500 border-zinc-800"
             }`}
           >
             🔁 {row.needsRevision ? "Marked for revision" : "Mark for revision"}
@@ -283,15 +283,15 @@ export default function ProblemDetailPage() {
               title={s.desc}
               className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
                 aiOpen[s.key]
-                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                  : "border-zinc-300 hover:border-emerald-400 dark:border-zinc-700"
+                  ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
+                  : "border-zinc-800 hover:border-lime-300 border-zinc-800"
               }`}
             >
               {aiLoading === s.key && <Spinner className="size-3" />}
               {s.label}
             </button>
           ))}
-          <span className="mx-1 hidden w-px bg-zinc-200 sm:block dark:bg-zinc-800" />
+          <span className="mx-1 hidden w-px bg-zinc-200 sm:block bg-zinc-800" />
           {AI_EXTRAS.map((s) => (
             <button
               key={s.key}
@@ -299,8 +299,8 @@ export default function ProblemDetailPage() {
               disabled={aiLoading !== null}
               className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
                 aiOpen[s.key]
-                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                  : "border-zinc-300 hover:border-emerald-400 dark:border-zinc-700"
+                  ? "border-lime-400 bg-lime-400/10 text-lime-600 dark:text-lime-300"
+                  : "border-zinc-800 hover:border-lime-300 border-zinc-800"
               }`}
             >
               {aiLoading === s.key && <Spinner className="size-3" />}
@@ -314,9 +314,9 @@ export default function ProblemDetailPage() {
           .map((s) => (
             <div
               key={s.key}
-              className="mt-4 rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/60"
+              className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/60 p-4/60"
             >
-              <div className="mb-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+              <div className="mb-1 text-xs font-semibold text-lime-600 dark:text-lime-300">
                 {s.label}
               </div>
               <div
@@ -361,7 +361,7 @@ export default function ProblemDetailPage() {
             </p>
           </div>
           <select
-            className="rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-xs font-medium outline-none focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+            className="rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs font-medium outline-none focus:border-lime-400 border-zinc-800"
             value={row.solutionLanguage}
             onChange={(e) => save({ solutionLanguage: e.target.value })}
           >

@@ -102,7 +102,7 @@ function BuiltinTab() {
   }, [map]);
 
   const select =
-    "rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-xs font-medium outline-none transition-colors focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900";
+    "rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 py-1.5 text-xs font-medium text-zinc-300 outline-none transition-colors focus:border-lime-400";
 
   if (loading) {
     return (
@@ -125,9 +125,9 @@ function BuiltinTab() {
           </span>
           <span>{pct}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+        <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
           <div
-            className="h-full rounded-full bg-linear-to-r from-emerald-500 to-teal-400 transition-all duration-500"
+            className="h-full rounded-full bg-linear-to-r from-lime-400 to-lime-500 transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -140,8 +140,8 @@ function BuiltinTab() {
                 onClick={() => setLevel(level === t ? "All" : t)}
                 className={`inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[11px] font-medium transition-colors ${
                   level === t
-                    ? "border-emerald-500 bg-emerald-500/10"
-                    : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+                    ? "border-lime-400 bg-lime-400/10"
+                    : "border-zinc-800 hover:border-zinc-600"
                 }`}
               >
                 <span className={`size-1.5 rounded-full ${TAG_DOT[t]}`} />
@@ -153,10 +153,10 @@ function BuiltinTab() {
       </div>
 
       {/* Filter bar */}
-      <div className="sticky top-0 z-10 -mx-4 mb-4 border-y border-zinc-200 bg-zinc-50/95 px-4 py-2.5 backdrop-blur md:top-0 md:mx-0 md:rounded-xl md:border dark:border-zinc-800 dark:bg-zinc-950/95">
+      <div className="sticky top-0 z-10 -mx-4 mb-4 border-y border-zinc-800 bg-zinc-950/95 px-4 py-2.5 backdrop-blur md:top-0 md:mx-0 md:rounded-xl md:border">
         <div className="flex flex-wrap items-center gap-2">
           <input
-            className="w-44 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900"
+            className="w-44 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
             placeholder="Search problems…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -181,8 +181,8 @@ function BuiltinTab() {
             onClick={() => setOnlyBookmarked(!onlyBookmarked)}
             className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               onlyBookmarked
-                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                : "border-zinc-300 text-zinc-500 dark:border-zinc-700"
+                ? "border-lime-400 bg-lime-400/10 text-lime-400"
+                : "border-zinc-800 text-zinc-500"
             }`}
           >
             <BookmarkIcon filled={onlyBookmarked} className="size-3.5" />
@@ -192,8 +192,8 @@ function BuiltinTab() {
             onClick={() => setOnlyRevision(!onlyRevision)}
             className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors ${
               onlyRevision
-                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                : "border-zinc-300 text-zinc-500 dark:border-zinc-700"
+                ? "border-lime-400 bg-lime-400/10 text-lime-400"
+                : "border-zinc-800 text-zinc-500"
             }`}
           >
             <RepeatIcon className="size-3.5" />
@@ -216,7 +216,7 @@ function BuiltinTab() {
           return (
             <section
               key={topicName}
-              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/40"
+              className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-900 border-zinc-800 bg-zinc-900/40"
             >
               <button
                 onClick={() =>
@@ -227,7 +227,7 @@ function BuiltinTab() {
                     return next;
                   })
                 }
-                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-zinc-800/50 hover:bg-zinc-900"
               >
                 <span
                   className={`text-xs text-zinc-400 transition-transform ${isCollapsed ? "" : "rotate-90"}`}
@@ -238,15 +238,15 @@ function BuiltinTab() {
                 <span className="text-xs text-zinc-500">
                   {solvedHere}/{questions.length}
                 </span>
-                <div className="ml-auto hidden h-1.5 w-28 overflow-hidden rounded-full bg-zinc-200 sm:block dark:bg-zinc-800">
+                <div className="ml-auto hidden h-1.5 w-28 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-800">
                   <div
-                    className="h-full rounded-full bg-emerald-500 transition-all"
+                    className="h-full rounded-full bg-lime-400 transition-all"
                     style={{ width: `${(solvedHere / questions.length) * 100}%` }}
                   />
                 </div>
               </button>
               {!isCollapsed && (
-                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 dark:border-zinc-800/60">
+                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-800/60">
                   {questions.map((q) => {
                     const row = getRow(q.id);
                     return (
@@ -258,8 +258,8 @@ function BuiltinTab() {
                           />
                           <Link
                             href={`/problems/${q.id}`}
-                            className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-emerald-500 ${
-                              row.status === "solved" ? "text-zinc-400 dark:text-zinc-500" : ""
+                            className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-lime-400 ${
+                              row.status === "solved" ? "text-zinc-400 text-zinc-500" : ""
                             }`}
                           >
                             {q.title}
@@ -281,7 +281,7 @@ function BuiltinTab() {
                             className={`transition-all hover:scale-110 ${
                               row.bookmark
                                 ? "text-amber-500"
-                                : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                                : "text-zinc-300 hover:text-zinc-500"
                             }`}
                           >
                             <BookmarkIcon filled={row.bookmark} className="size-4" />
@@ -291,8 +291,8 @@ function BuiltinTab() {
                             onClick={() => update(q.id, { needsRevision: !row.needsRevision })}
                             className={`transition-all hover:scale-110 ${
                               row.needsRevision
-                                ? "text-emerald-500"
-                                : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                                ? "text-lime-400"
+                                : "text-zinc-300 hover:text-zinc-500"
                             }`}
                           >
                             <RepeatIcon className="size-4" />
@@ -302,7 +302,7 @@ function BuiltinTab() {
                             target="_blank"
                             rel="noreferrer"
                             title={`Open on ${q.platform}`}
-                            className="text-zinc-400 transition-colors hover:text-emerald-500"
+                            className="text-zinc-400 transition-colors hover:text-lime-400"
                           >
                             <ExternalLinkIcon className="size-3.5" />
                           </a>
@@ -356,12 +356,12 @@ function ImportsTab() {
 
   if (questions.length === 0) {
     return (
-      <div className="rounded-2xl border border-zinc-200 bg-white p-10 text-center dark:border-zinc-800 dark:bg-zinc-900/40">
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-900 p-10 text-center border-zinc-800 bg-zinc-900/40">
         <div className="mb-2 text-3xl">📋</div>
         <p className="text-sm font-medium">No imported problems yet</p>
         <p className="mx-auto mt-1 max-w-xs text-xs text-zinc-500">
           Go to{" "}
-          <Link href="/sheets" className="text-emerald-500 hover:underline">
+          <Link href="/sheets" className="text-lime-400 hover:underline">
             My Sheets
           </Link>{" "}
           to import a CSV, PDF, or paste a LeetCode / GFG URL.
@@ -374,7 +374,7 @@ function ImportsTab() {
     <>
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <input
-          className="w-52 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900"
+          className="w-52 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400"
           placeholder="Search imported problems…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -393,7 +393,7 @@ function ImportsTab() {
           return (
             <section
               key={sheet.id}
-              className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/40"
+              className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-900 border-zinc-800 bg-zinc-900/40"
             >
               {/* Sheet header */}
               <div className="flex items-center gap-3 px-4 py-3">
@@ -417,9 +417,9 @@ function ImportsTab() {
                   <span className="text-xs text-zinc-500">
                     {solved}/{sheetQs.length}
                   </span>
-                  <div className="ml-auto hidden h-1.5 w-24 overflow-hidden rounded-full bg-zinc-200 sm:block dark:bg-zinc-800">
+                  <div className="ml-auto hidden h-1.5 w-24 overflow-hidden rounded-full bg-zinc-200 sm:block bg-zinc-800">
                     <div
-                      className="h-full rounded-full bg-emerald-500 transition-all"
+                      className="h-full rounded-full bg-lime-400 transition-all"
                       style={{
                         width: `${sheetQs.length ? (solved / sheetQs.length) * 100 : 0}%`,
                       }}
@@ -428,7 +428,7 @@ function ImportsTab() {
                 </button>
                 <Link
                   href={`/sheets/${sheet.id}`}
-                  className="text-[11px] font-medium text-zinc-400 transition-colors hover:text-emerald-500"
+                  className="text-[11px] font-medium text-zinc-400 transition-colors hover:text-lime-400"
                 >
                   Manage →
                 </Link>
@@ -436,8 +436,8 @@ function ImportsTab() {
                   onClick={() => setAddingTo(addingTo === sheet.id ? null : sheet.id)}
                   className={`rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-colors ${
                     addingTo === sheet.id
-                      ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                      : "border-zinc-300 text-zinc-500 hover:border-emerald-400 dark:border-zinc-700"
+                      ? "border-lime-400 bg-lime-400/10 text-lime-400"
+                      : "border-zinc-800 text-zinc-500 hover:border-lime-400"
                   }`}
                 >
                   + Add
@@ -446,7 +446,7 @@ function ImportsTab() {
 
               {/* Add panel inline */}
               {addingTo === sheet.id && (
-                <div className="border-t border-zinc-100 p-4 dark:border-zinc-800/60">
+                <div className="border-t border-zinc-100 p-4 border-zinc-800/60">
                   <AddQuestionPanel
                     sheetId={sheet.id}
                     existingQuestions={sheetQs}
@@ -458,7 +458,7 @@ function ImportsTab() {
 
               {/* Question rows */}
               {!isCollapsed && qs.length > 0 && (
-                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 dark:border-zinc-800/60">
+                <ul className="divide-y divide-zinc-100 border-t border-zinc-100 dark:divide-zinc-800/60 border-zinc-800/60">
                   {qs.map((q) => {
                     const row = getRow(q.id);
                     return (
@@ -470,8 +470,8 @@ function ImportsTab() {
                           />
                           <Link
                             href={`/problems/${q.id}`}
-                            className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-emerald-500 ${
-                              row.status === "solved" ? "text-zinc-400 dark:text-zinc-500" : ""
+                            className={`min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-lime-400 ${
+                              row.status === "solved" ? "text-zinc-400 text-zinc-500" : ""
                             }`}
                           >
                             {displayTitle(q)}
@@ -493,7 +493,7 @@ function ImportsTab() {
                             className={`transition-all hover:scale-110 ${
                               row.bookmark
                                 ? "text-amber-500"
-                                : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                                : "text-zinc-300 hover:text-zinc-500"
                             }`}
                           >
                             <BookmarkIcon filled={row.bookmark} className="size-4" />
@@ -503,8 +503,8 @@ function ImportsTab() {
                             onClick={() => update(q.id, { needsRevision: !row.needsRevision })}
                             className={`transition-all hover:scale-110 ${
                               row.needsRevision
-                                ? "text-emerald-500"
-                                : "text-zinc-300 hover:text-zinc-500 dark:text-zinc-600 dark:hover:text-zinc-400"
+                                ? "text-lime-400"
+                                : "text-zinc-300 hover:text-zinc-500"
                             }`}
                           >
                             <RepeatIcon className="size-4" />
@@ -515,7 +515,7 @@ function ImportsTab() {
                               target="_blank"
                               rel="noreferrer"
                               title="Open original"
-                              className="text-zinc-400 transition-colors hover:text-emerald-500"
+                              className="text-zinc-400 transition-colors hover:text-lime-400"
                             >
                               <ExternalLinkIcon className="size-3.5" />
                             </a>
@@ -527,7 +527,7 @@ function ImportsTab() {
                 </ul>
               )}
               {!isCollapsed && qs.length === 0 && search && (
-                <p className="border-t border-zinc-100 py-6 text-center text-xs text-zinc-400 dark:border-zinc-800">
+                <p className="border-t border-zinc-100 py-6 text-center text-xs text-zinc-400 border-zinc-800">
                   No matches in this sheet.
                 </p>
               )}
@@ -564,8 +564,8 @@ function ProblemsInner() {
           onClick={() => setShowGlobalAdd(!showGlobalAdd)}
           className={`inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
             showGlobalAdd
-              ? "bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/40 dark:text-emerald-400"
-              : "bg-emerald-500 text-white hover:bg-emerald-600"
+              ? "bg-lime-400/10 text-lime-600 ring-1 ring-lime-400/40 dark:text-lime-300"
+              : "bg-lime-400 text-white hover:bg-lime-600"
           }`}
         >
           {showGlobalAdd ? "✕ Cancel" : "+ Add Question"}
@@ -574,11 +574,11 @@ function ProblemsInner() {
 
       {/* Global add panel */}
       {showGlobalAdd && (
-        <div className="mb-5 rounded-2xl border border-emerald-500/40 bg-white p-5 shadow-sm dark:bg-zinc-900/60">
+        <div className="mb-5 rounded-2xl border border-lime-400/40 bg-zinc-900/60 p-5">
           {sheets.length === 0 ? (
             <p className="text-sm text-zinc-500">
               No sheets yet.{" "}
-              <Link href="/sheets" className="text-emerald-500 hover:underline">
+              <Link href="/sheets" className="text-lime-400 hover:underline">
                 Create a sheet first
               </Link>
               , then add questions to it.
@@ -586,11 +586,11 @@ function ProblemsInner() {
           ) : (
             <>
               <div className="mb-4 flex flex-wrap items-center gap-3">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="text-sm font-medium text-zinc-700 text-zinc-300">
                   Add to:
                 </label>
                 <select
-                  className="rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-900"
+                  className="rounded-lg border border-zinc-300 bg-zinc-900 px-2.5 py-1.5 text-sm outline-none transition-colors focus:border-lime-400 bg-zinc-900"
                   value={effectiveSheetId ?? ""}
                   onChange={(e) => setSelectedSheetId(Number(e.target.value))}
                 >
@@ -617,12 +617,12 @@ function ProblemsInner() {
       )}
 
       {/* Tab bar */}
-      <div className="mb-5 flex gap-1 rounded-xl border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900/40">
+      <div className="mb-5 flex gap-1 rounded-xl border border-zinc-200 bg-zinc-900 p-1 border-zinc-800 bg-zinc-900/40">
         <button
           onClick={() => setActiveTab("builtin")}
           className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${
             activeTab === "builtin"
-              ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100"
+              ? "bg-zinc-900 text-zinc-100 shadow-sm bg-zinc-800 text-zinc-100"
               : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >
@@ -632,13 +632,13 @@ function ProblemsInner() {
           onClick={() => setActiveTab("imports")}
           className={`flex-1 rounded-lg py-2 text-sm font-medium transition-colors ${
             activeTab === "imports"
-              ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100"
+              ? "bg-zinc-900 text-zinc-100 shadow-sm bg-zinc-800 text-zinc-100"
               : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >
           My Imports
           {importedQs.length > 0 && (
-            <span className="ml-1.5 rounded-full bg-emerald-500/20 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+            <span className="ml-1.5 rounded-full bg-lime-400/20 px-1.5 py-0.5 text-[11px] font-semibold text-lime-400">
               {importedQs.length}
             </span>
           )}

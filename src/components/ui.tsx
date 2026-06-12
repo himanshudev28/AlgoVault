@@ -1,25 +1,26 @@
 import type { Tag } from "@/data/questions";
 
+// Crackr-style difficulty colors (green for easy, lime-400 is our accent — keep distinct)
 export const TAG_STYLES: Record<Tag, string> = {
-  easy: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
-  "easy+": "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/30",
-  medium: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
-  "medium+": "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/30",
-  hard: "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30",
+  easy:    "bg-green-500/10 text-green-400 border-green-500/20",
+  "easy+": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+  medium:  "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  "medium+":"bg-orange-500/10 text-orange-400 border-orange-500/20",
+  hard:    "bg-red-500/10 text-red-400 border-red-500/20",
 };
 
 export const TAG_DOT: Record<Tag, string> = {
-  easy: "bg-emerald-500",
-  "easy+": "bg-teal-500",
-  medium: "bg-amber-500",
-  "medium+": "bg-orange-500",
-  hard: "bg-red-500",
+  easy:    "bg-green-500",
+  "easy+": "bg-cyan-500",
+  medium:  "bg-amber-500",
+  "medium+":"bg-orange-500",
+  hard:    "bg-red-500",
 };
 
 export function DifficultyBadge({ tag }: { tag: Tag }) {
   return (
     <span
-      className={`inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap ${TAG_STYLES[tag]}`}
+      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold tracking-wide ${TAG_STYLES[tag]}`}
     >
       {tag}
     </span>
@@ -29,11 +30,11 @@ export function DifficultyBadge({ tag }: { tag: Tag }) {
 export function PlatformBadge({ platform }: { platform: string }) {
   const style =
     platform === "LeetCode"
-      ? "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/25"
-      : "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/25";
+      ? "bg-orange-500/10 text-orange-400 border-orange-500/20"
+      : "bg-green-500/10 text-green-400 border-green-500/20";
   return (
     <span
-      className={`inline-flex items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap ${style}`}
+      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ${style}`}
     >
       {platform}
     </span>
@@ -80,7 +81,7 @@ export function Ring({
           r={r}
           fill="none"
           strokeWidth={stroke}
-          className="stroke-zinc-200 dark:stroke-zinc-800"
+          className="stroke-zinc-800"
         />
         <circle
           cx={size / 2}
@@ -91,7 +92,7 @@ export function Ring({
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - pct)}
-          className="stroke-emerald-500 transition-[stroke-dashoffset] duration-700"
+          className="stroke-lime-400 transition-[stroke-dashoffset] duration-700"
         />
       </svg>
       <div className="absolute text-center">
@@ -135,6 +136,7 @@ export function ExternalLinkIcon({ className = "size-3.5" }: { className?: strin
   );
 }
 
+// Crackr-style card: dark surface, tight border, no shadow
 export function Card({
   children,
   className = "",
@@ -144,7 +146,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950/60 ${className}`}
+      className={`rounded-xl border border-zinc-800 bg-zinc-900/60 ${className}`}
     >
       {children}
     </div>

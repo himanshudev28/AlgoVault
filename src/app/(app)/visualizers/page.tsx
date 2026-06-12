@@ -22,10 +22,10 @@ export default function VisualizersPage() {
               <Link
                 key={v.slug}
                 href={`/visualizers/${v.slug}`}
-                className="group rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:border-emerald-400 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/40"
+                className="group rounded-2xl border border-zinc-800 bg-zinc-900 p-5 shadow-sm transition-all hover:border-lime-300 hover:shadow-md border-zinc-800 bg-zinc-900/40"
               >
                 <div className="mb-2 text-2xl">{v.icon}</div>
-                <h3 className="font-semibold transition-colors group-hover:text-emerald-500">
+                <h3 className="font-semibold transition-colors group-hover:text-lime-400">
                   {v.name}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-zinc-500">{v.desc}</p>

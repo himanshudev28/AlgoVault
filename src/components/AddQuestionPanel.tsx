@@ -163,14 +163,14 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
   };
 
   const input =
-    "w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950";
+    "w-full rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-lime-400 border-zinc-800 dark:bg-zinc-950";
   const btnPrimary =
-    "rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 disabled:opacity-60";
+    "rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-lime-600 disabled:opacity-60";
   const btnGhost =
-    "rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium transition-colors hover:border-emerald-400 dark:border-zinc-700";
+    "rounded-xl border border-zinc-800 px-4 py-2 text-sm font-medium transition-colors hover:border-lime-300 border-zinc-800";
 
   return (
-    <div className="rounded-2xl border border-emerald-500/40 bg-white p-5 shadow-sm dark:bg-zinc-900/60">
+    <div className="rounded-2xl border border-lime-400/40 bg-zinc-900 p-5 shadow-sm bg-zinc-900">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-semibold">Add question to this sheet</h3>
@@ -180,14 +180,14 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
       </div>
 
       {/* Tab switcher */}
-      <div className="mb-4 flex gap-1 rounded-xl border border-zinc-200 p-1 dark:border-zinc-800">
+      <div className="mb-4 flex gap-1 rounded-xl border border-zinc-800 p-1 border-zinc-800">
         {(["url", "manual"] as const).map((t) => (
           <button
             key={t}
             onClick={() => { setTab(t); setPreview(null); setFetchError(null); setEditedDraft({}); setSkipDup(false); }}
             className={`flex-1 rounded-lg py-1.5 text-xs font-medium transition-colors ${
               tab === t
-                ? "bg-emerald-500 text-white"
+                ? "bg-lime-400 text-white"
                 : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             }`}
           >
@@ -217,14 +217,14 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
 
           {/* Preview */}
           {preview && (
-            <div className="space-y-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/60">
+            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-50 p-4 border-zinc-800 dark:bg-zinc-950/60">
               <div className="flex flex-wrap items-start gap-2">
-                <span className="rounded-md border border-zinc-300 bg-white px-1.5 py-0.5 text-[11px] font-medium dark:border-zinc-700 dark:bg-zinc-900">
+                <span className="rounded-md border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 text-[11px] font-medium border-zinc-800 bg-zinc-900">
                   {merged.tag && <DifficultyBadge tag={merged.tag as Tag} />}
                 </span>
                 <span className="text-[11px] text-zinc-500">{preview.platform}</span>
                 {preview.tags.slice(0, 4).map((t) => (
-                  <span key={t} className="rounded-md bg-zinc-200/60 px-1.5 py-0.5 text-[11px] text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                  <span key={t} className="rounded-md bg-zinc-200/60 px-1.5 py-0.5 text-[11px] text-zinc-600 bg-zinc-800 dark:text-zinc-400">
                     {t}
                   </span>
                 ))}
@@ -243,7 +243,7 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
                   <div className="flex-1">
                     <label className="mb-1 block text-[11px] font-medium text-zinc-500">Topic</label>
                     <select
-                      className="w-full rounded-xl border border-zinc-300 bg-white px-2.5 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+                      className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-2.5 py-2 text-sm outline-none focus:border-lime-400 border-zinc-800 dark:bg-zinc-950"
                       value={merged.topic}
                       onChange={(e) => setEditedDraft((p) => ({ ...p, topic: e.target.value }))}
                     >
@@ -253,7 +253,7 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
                   <div>
                     <label className="mb-1 block text-[11px] font-medium text-zinc-500">Difficulty</label>
                     <select
-                      className="rounded-xl border border-zinc-300 bg-white px-2.5 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+                      className="rounded-xl border border-zinc-800 bg-zinc-900 px-2.5 py-2 text-sm outline-none focus:border-lime-400 border-zinc-800 dark:bg-zinc-950"
                       value={merged.tag}
                       onChange={(e) => setEditedDraft((p) => ({ ...p, tag: e.target.value }))}
                     >
@@ -264,12 +264,12 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
               </div>
 
               {preview.description && (
-                <details className="rounded-lg border border-zinc-200 dark:border-zinc-800">
+                <details className="rounded-lg border border-zinc-800">
                   <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300">
                     Problem statement preview
                   </summary>
                   <div
-                    className="prose-problem max-h-52 overflow-y-auto border-t border-zinc-200 px-3 py-2 dark:border-zinc-800"
+                    className="prose-problem max-h-52 overflow-y-auto border-t border-zinc-800 px-3 py-2 border-zinc-800"
                     dangerouslySetInnerHTML={{ __html: preview.description.startsWith("<") ? preview.description : preview.description.replace(/\n/g, "<br>") }}
                   />
                 </details>
@@ -304,7 +304,7 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
             <div className="flex-1">
               <label className="mb-1 block text-[11px] font-medium text-zinc-500">Topic</label>
               <select
-                className="w-full rounded-xl border border-zinc-300 bg-white px-2.5 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+                className="w-full rounded-xl border border-zinc-800 bg-zinc-900 px-2.5 py-2 text-sm outline-none focus:border-lime-400 border-zinc-800 dark:bg-zinc-950"
                 value={draft.topic}
                 onChange={(e) => setDraft((p) => ({ ...p, topic: e.target.value }))}
               >
@@ -314,7 +314,7 @@ export function AddQuestionPanel({ sheetId, existingQuestions, onSaved, onClose 
             <div>
               <label className="mb-1 block text-[11px] font-medium text-zinc-500">Difficulty</label>
               <select
-                className="rounded-xl border border-zinc-300 bg-white px-2.5 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950"
+                className="rounded-xl border border-zinc-800 bg-zinc-900 px-2.5 py-2 text-sm outline-none focus:border-lime-400 border-zinc-800 dark:bg-zinc-950"
                 value={draft.tag}
                 onChange={(e) => setDraft((p) => ({ ...p, tag: e.target.value }))}
               >

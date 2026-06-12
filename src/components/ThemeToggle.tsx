@@ -22,7 +22,7 @@ export function ThemeToggle() {
     <button
       onClick={toggle}
       title="Toggle theme"
-      className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-900"
+      className="inline-flex size-8 items-center justify-center rounded-lg border border-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
     >
       {dark ? "☀️" : "🌙"}
     </button>

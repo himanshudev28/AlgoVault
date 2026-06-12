@@ -91,13 +91,13 @@ export default function SheetsPage() {
   };
 
   const input =
-    "rounded-xl border border-zinc-300 bg-white px-3.5 py-2 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-emerald-500 dark:border-zinc-700 dark:bg-zinc-950";
+    "rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-2 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-600 focus:border-lime-400";
   const card =
-    "rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/40";
+    "rounded-2xl border border-zinc-800 bg-zinc-900 border-zinc-800 bg-zinc-900/40";
   const btn =
-    "rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 disabled:opacity-60";
+    "rounded-xl bg-lime-400 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-lime-600 disabled:opacity-60";
   const btnGhost =
-    "rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium transition-colors hover:border-emerald-400 dark:border-zinc-700";
+    "rounded-xl border border-zinc-800 px-4 py-2 text-sm font-medium transition-colors hover:border-lime-300 border-zinc-800";
 
   if (loading) {
     return (
@@ -136,7 +136,7 @@ export default function SheetsPage() {
         <div className={`${card} overflow-x-auto`}>
           <table className="w-full min-w-175 text-sm">
             <thead>
-              <tr className="border-b border-zinc-200 text-left text-xs text-zinc-500 dark:border-zinc-800">
+              <tr className="border-b border-zinc-800 text-left text-xs text-zinc-500 border-zinc-800">
                 <th className="px-3 py-2 font-medium">Title *</th>
                 <th className="px-3 py-2 font-medium">Link</th>
                 <th className="px-3 py-2 font-medium">Topic</th>
@@ -148,7 +148,7 @@ export default function SheetsPage() {
             <tbody>
               {drafts.map((d, i) => {
                 const cell =
-                  "w-full bg-transparent px-1 py-1 text-sm outline-none focus:bg-emerald-500/5";
+                  "w-full bg-transparent px-1 py-1 text-sm outline-none focus:bg-lime-400/5";
                 const set = (patch: Partial<DraftQuestion>) =>
                   setDrafts((prev) =>
                     prev!.map((row, j) => (j === i ? { ...row, ...patch } : row)),
@@ -156,7 +156,7 @@ export default function SheetsPage() {
                 return (
                   <tr
                     key={i}
-                    className="border-b border-zinc-100 last:border-0 dark:border-zinc-800/60"
+                    className="border-b border-zinc-800 last:border-0 border-zinc-800/60"
                   >
                     <td className="px-2 py-1">
                       <input className={cell} value={d.title} onChange={(e) => set({ title: e.target.value })} />
@@ -169,7 +169,7 @@ export default function SheetsPage() {
                     </td>
                     <td className="px-2 py-1">
                       <select
-                        className="rounded-md border border-zinc-200 bg-transparent px-1.5 py-1 text-xs dark:border-zinc-800"
+                        className="rounded-md border border-zinc-800 bg-transparent px-1.5 py-1 text-xs border-zinc-800"
                         value={d.tag}
                         onChange={(e) => set({ tag: e.target.value })}
                       >
@@ -216,7 +216,7 @@ export default function SheetsPage() {
         </p>
 
         {busy && (
-          <div className="mb-4 flex items-center gap-2 rounded-xl bg-emerald-500/10 px-4 py-3 text-sm text-emerald-600 dark:text-emerald-400">
+          <div className="mb-4 flex items-center gap-2 rounded-xl bg-lime-400/10 px-4 py-3 text-sm text-lime-600 dark:text-lime-300">
             <Spinner /> {busy}
           </div>
         )}
@@ -336,7 +336,7 @@ export default function SheetsPage() {
               <div key={s.id} className={`${card} group p-5`}>
                 <div className="flex items-start justify-between gap-2">
                   <Link href={`/sheets/${s.id}`} className="min-w-0">
-                    <h2 className="truncate font-semibold transition-colors group-hover:text-emerald-500">
+                    <h2 className="truncate font-semibold transition-colors group-hover:text-lime-400">
                       {s.name}
                     </h2>
                     <p className="mt-0.5 text-xs text-zinc-500">
@@ -358,16 +358,16 @@ export default function SheetsPage() {
                     </span>
                     <span>{pct}%</span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-zinc-200 bg-zinc-800">
                     <div
-                      className="h-full rounded-full bg-emerald-500 transition-all"
+                      className="h-full rounded-full bg-lime-400 transition-all"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
                 </div>
                 <Link
                   href={`/sheets/${s.id}`}
-                  className="mt-4 inline-block text-xs font-medium text-emerald-500 hover:underline"
+                  className="mt-4 inline-block text-xs font-medium text-lime-400 hover:underline"
                 >
                   Open sheet →
                 </Link>

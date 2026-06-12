@@ -48,24 +48,24 @@ export function ProfileButton() {
       {/* Avatar button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="group relative flex size-9 items-center justify-center overflow-hidden rounded-full ring-2 ring-transparent transition-all hover:ring-emerald-500/40 focus:outline-none focus:ring-emerald-500/40"
+        className="group relative flex size-9 items-center justify-center overflow-hidden rounded-full ring-2 ring-transparent transition-all hover:ring-lime-400/40 focus:outline-none focus:ring-lime-400/40"
         title={name}
       >
         {user.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={user.imageUrl} alt={name} className="size-full object-cover" />
         ) : (
-          <span className="flex size-full items-center justify-center bg-linear-to-br from-emerald-500 to-teal-600 text-xs font-bold text-white">
+          <span className="flex size-full items-center justify-center bg-linear-to-br from-lime-400 to-lime-600 text-xs font-bold text-white">
             {initials}
           </span>
         )}
         {/* Online indicator */}
-        <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-zinc-950" />
+        <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-white bg-lime-400 dark:border-zinc-950" />
       </button>
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute right-0 top-11 z-50 w-60 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl shadow-black/5 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/30">
+        <div className="absolute right-0 top-11 z-50 w-60 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-xl shadow-black/40">
           {/* User info header */}
           <div className="flex items-center gap-3 px-4 py-3.5">
             <div className="relative shrink-0">
@@ -74,12 +74,12 @@ export function ProfileButton() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={user.imageUrl} alt={name} className="size-full object-cover" />
                 ) : (
-                  <span className="flex size-full items-center justify-center bg-linear-to-br from-emerald-500 to-teal-600 text-sm font-bold text-white">
+                  <span className="flex size-full items-center justify-center bg-linear-to-br from-lime-400 to-lime-600 text-sm font-bold text-white">
                     {initials}
                   </span>
                 )}
               </div>
-              <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-zinc-900" />
+              <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-white bg-lime-400 dark:border-zinc-900" />
             </div>
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold">{name}</p>
@@ -87,20 +87,20 @@ export function ProfileButton() {
             </div>
           </div>
 
-          <div className="border-t border-zinc-100 dark:border-zinc-800" />
+          <div className="border-t border-zinc-800" />
 
           {/* Actions */}
           <div className="p-1.5">
             <button
               onClick={() => { setOpen(false); openUserProfile(); }}
-              className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-zinc-300 transition-colors hover:bg-zinc-800"
             >
               <UserIcon />
               Manage account
             </button>
             <button
               onClick={() => signOut({ redirectUrl: "/" })}
-              className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm text-red-500 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30"
+              className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-red-400 transition-colors hover:bg-red-950/40"
             >
               <LogOutIcon />
               Sign out

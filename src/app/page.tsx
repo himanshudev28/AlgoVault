@@ -374,9 +374,13 @@ export default async function Home() {
           {/* Sheets grid */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {BHAIYA_SHEETS.slice(0, 6).map((sheet) => (
-              <div key={sheet.id} className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-zinc-700 hover:bg-zinc-900/80">
+              <Link
+                key={sheet.id}
+                href={authed ? "/bhaiya-sheets" : "/sign-up"}
+                className="group rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition-all hover:border-lime-400/30 hover:bg-zinc-900/80 cursor-pointer block"
+              >
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <p className="text-sm font-semibold text-zinc-200 leading-snug">{sheet.name}</p>
+                  <p className="text-sm font-semibold text-zinc-200 leading-snug group-hover:text-white transition-colors">{sheet.name}</p>
                   <span className="shrink-0 rounded-lg bg-zinc-800 px-2 py-0.5 text-[11px] font-medium tabular-nums text-zinc-400">{sheet.questionCount}+</span>
                 </div>
                 <p className="text-[11px] text-zinc-500 truncate">{sheet.author}</p>
@@ -385,7 +389,7 @@ export default async function Home() {
                     <span key={t} className="rounded-md bg-lime-400/8 px-1.5 py-0.5 text-[10px] text-lime-400">{t}</span>
                   ))}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
